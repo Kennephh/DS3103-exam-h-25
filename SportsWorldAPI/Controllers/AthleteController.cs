@@ -18,10 +18,11 @@ public class AthletesController(ApplicationDbContext context) : ControllerBase
 
             if (purchaseStatus.HasValue)
             {
-                query = query.Where(a => a.PurchaseStatus == purchaseStatus.Value);
+                query = query.Where(athlete => athlete.PurchaseStatus == purchaseStatus.Value);
             }
 
-            var athletes = await context.Athletes.ToListAsync();
+            var athletes = await query.ToListAsync();
+
             return Ok(athletes);
         }
         catch
@@ -95,14 +96,50 @@ public class AthletesController(ApplicationDbContext context) : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> PutAthlete(int id, Athlete athlete)
     {
+
+        var existingAthlete = await context.Athletes.FindAsync(id);
+
+        if (existingAthlete == null) return NotFound();
+
         try
         {
+            existingAthlete.Name = athlete.Name;
+            existingAthlete.Gender = athlete.Gender;
+            existingAthlete.Price = athlete.Price;
+            existingAthlete.Image = athlete.Image;
+            existingAthlete.PurchaseStatus = athlete.PurchaseStatus;
+
             await context.SaveChangesAsync();
+
+            return NoContent();
         }
         catch
         {
-
+            return StatusCode(500, "Error while updating athlete.");
         }
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteAthlete(int id)
+    {
+        var athlete = await context.Athletes.FindAsync(id);
+
+        if (athlete == null) return NotFound();
+
+        try
+        {
+            context.Athletes.Remove(athlete);
+
+            await context.SaveChangesAsync();
+
+            return NoContent();
+        }
+        catch
+        {
+            return StatusCode(500, "Error while deleting athlete.");
+        }
+
+
     }
 
 }
