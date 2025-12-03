@@ -32,4 +32,20 @@ public class VenueController (ApplicationDbContext _appDbContext) : ControllerBa
         }
     }
 
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Venue>> GetVenueById(int id)
+    {
+        try
+        {
+            var venue = await _appDbContext.Venues.FindAsync(id);
+            if(venue == null) return NotFound($"Venue with {id} not found.");
+
+            return Ok(venue);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, $"Server side error: {e.Message}");
+        }
+    }
+
 }
