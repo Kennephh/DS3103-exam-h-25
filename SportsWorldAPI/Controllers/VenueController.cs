@@ -38,7 +38,10 @@ public class VenueController (ApplicationDbContext _appDbContext) : ControllerBa
         try
         {
             var venue = await _appDbContext.Venues.FindAsync(id);
-            if(venue == null) return NotFound($"Venue with {id} not found.");
+            if(venue == null)
+            {
+                return NotFound($"Venue with id: {id} not found.");
+            }
 
             return Ok(venue);
         }
