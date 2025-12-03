@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using SportsWorldApi.Models;
+using SportsWorldAPI.Models;
 
 namespace SportsWorldAPI.Data
 {
