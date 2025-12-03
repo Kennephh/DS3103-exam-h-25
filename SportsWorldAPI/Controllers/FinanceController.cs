@@ -8,20 +8,24 @@ using SportsWorldAPI.Models;
 [Route("api/[controller]")]
 public class FinanceController( ApplicationDbContext _applicationDbContext ) : ControllerBase
 {
+
+    // GET
+    [HttpGet]
     public async Task<ActionResult<Finance>> GetFinancials()
     {
         try{
-            var finances = await _applicationDbContext.Finances.FirstOrDefaultAsync();
+            var finances = await _applicationDbContext.Finances.SingleOrDefaultAsync();
             return Ok(finances);
         }
         catch
         {
             return StatusCode(500, "Server side error when getting finances");
         }
-    }
+    } // GET END
 
+    // POST
     [HttpPost("loan")]
-public async Task<ActionResult> GetLoan([FromBody] int loanAmount)
+    public async Task<ActionResult> GetLoan([FromBody] int loanAmount)
     {
         try
         {
@@ -37,9 +41,9 @@ public async Task<ActionResult> GetLoan([FromBody] int loanAmount)
         }
         catch
         {
-            return StatusCode(500, " Server side error when posting loan");
-        }
-    }
+            return StatusCode(500,"Server side error when posting loan");
+        } 
+    } // POST END
 
 
     
