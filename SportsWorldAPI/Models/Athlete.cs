@@ -1,6 +1,6 @@
-namespace SportsWorld.Api.Models{
+namespace SportsWorldApi.Models {
 
-    public class Athlete{
+    public class Athlete {
 
         public int Id { get; set; }
         public string? Name { get; set; }
