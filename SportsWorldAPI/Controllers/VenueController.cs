@@ -40,9 +40,8 @@ public class VenueController (ApplicationDbContext _appDbContext) : ControllerBa
             var venue = await _appDbContext.Venues.FindAsync(id);
             if(venue == null)
             {
-                return NotFound($"Venue with id: {id} not found.");
+                return NotFound($"Venue with id: '{id}' not found.");
             }
-
             return Ok(venue);
         }
         catch (Exception e)
@@ -50,5 +49,30 @@ public class VenueController (ApplicationDbContext _appDbContext) : ControllerBa
             return StatusCode(500, $"Server side error: {e.Message}");
         }
     }
+
+    [HttpGet("ByName/{name}")]
+    public async Task<ActionResult<Venue>> GetVenueByName(string name)
+    {
+        try
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return BadRequest("Venue name cannot be empty or whitespace.");
+            }
+
+            var venue = await _appDbContext.Venues.FirstOrDefaultAsync(venue => venue.Name == name);
+            
+            if(venue == null)
+            {
+                return NotFound($"Venue with name: '{name}' could not be found.");
+            }
+            return Ok(venue);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, $"Server sider error: {e.Message}");
+        }
+    }
+
 
 }
