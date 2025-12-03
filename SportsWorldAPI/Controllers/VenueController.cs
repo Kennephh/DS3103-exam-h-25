@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using SportsWorldAPI.Models;
 using SportsWorldAPI.Data;
+using Microsoft.Extensions.FileProviders;
 
 namespace SportsWorldAPI.Controllers;
 
@@ -84,8 +85,25 @@ public class VenueController (ApplicationDbContext _appDbContext) : ControllerBa
             }
             _appDbContext.Venues.Add(newVenue);
             await _appDbContext.SaveChangesAsync();
-            
+
             return CreatedAtAction(nameof(GetVenueById), new {id = newVenue.Id}, newVenue );
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, $"Server sider error: {e.Message}");
+        }
+    }
+
+    [HttpPut]
+    public async Task<IActionResult> PutVenue(int id, Venue updatedVenue)
+    {
+        try
+        {
+            if(id != updatedVenue.Id)
+            {
+                return BadRequest("Error updating the venue ");
+            }
+            return NoContent();
         }
         catch (Exception e)
         {
