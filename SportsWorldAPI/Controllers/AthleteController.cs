@@ -101,7 +101,7 @@ public class AthletesController(ApplicationDbContext context) : ControllerBase
         }
         catch
         {
-
+            
         }
     }
 

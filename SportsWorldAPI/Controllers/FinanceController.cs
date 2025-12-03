@@ -4,6 +4,27 @@ using SportsWorldAPI.Data;
 using SportsWorldAPI.Models;
 
 
+    /*
+    Hvor mye penger selskapet har til rådighet?
+        Ved kjøp av atlet; moneyLeft -= athlete.price 
+
+    Hvor mange atleter har blitt kjøpt?
+        var athleteCounter++
+
+    Totalt forbruk
+        var totalPriceSpent, ved hvert atlet kjøp så blir det totalPriceSpent += athlete.price
+
+    Skriv inn mengde å låne fra banken
+        finances.moneyLeft += loanAmount. Skal gjelden lagres? Da er det var debt += loanAmount
+
+    Vis atleter som ikke er blitt kjøpt
+        if(!athlete.purchased)
+            return Ok(athletes)
+
+    Kjøp atlet
+        athlete.purchased = false
+    */
+
 [ApiController]
 [Route("api/[controller]")]
 public class FinanceController( ApplicationDbContext _applicationDbContext ) : ControllerBase
@@ -14,7 +35,7 @@ public class FinanceController( ApplicationDbContext _applicationDbContext ) : C
     public async Task<ActionResult<Finance>> GetFinancials()
     {
         try{
-            var finances = await _applicationDbContext.Finances.SingleOrDefaultAsync();
+            var finances = await _applicationDbContext.Finances.SingleOrDefaultAsync(); // Henter en
             return Ok(finances);
         }
         catch
@@ -35,7 +56,7 @@ public class FinanceController( ApplicationDbContext _applicationDbContext ) : C
                 return NotFound("Finances not found");
             }
             
-            finances.MoneyLeft += loanAmount;
+            finances.MoneyLeft += loanAmount; // Plusser antall penger på bok med penger lånt
             await _applicationDbContext.SaveChangesAsync();
             return Ok(finances);
         }
@@ -45,7 +66,7 @@ public class FinanceController( ApplicationDbContext _applicationDbContext ) : C
         } 
     } // POST END
 
-    
+
     
 }
 
