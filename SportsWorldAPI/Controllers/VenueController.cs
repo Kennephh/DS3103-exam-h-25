@@ -59,7 +59,6 @@ public class VenueController (ApplicationDbContext _appDbContext) : ControllerBa
             {
                 return BadRequest("Venue name cannot be empty or whitespace.");
             }
-
             var venue = await _appDbContext.Venues.FirstOrDefaultAsync(venue => venue.Name == name);
             
             if(venue == null)
@@ -67,6 +66,26 @@ public class VenueController (ApplicationDbContext _appDbContext) : ControllerBa
                 return NotFound($"Venue with name: '{name}' could not be found.");
             }
             return Ok(venue);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, $"Server sider error: {e.Message}");
+        }
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<Venue>> PostVenue(Venue newVenue)
+    {
+        try
+        {
+            if(newVenue == null)
+            {
+                return BadRequest("Venue data is null.");
+            }
+            _appDbContext.Venues.Add(newVenue);
+            await _appDbContext.SaveChangesAsync();
+            
+            return CreatedAtAction(nameof(GetVenueById), new {id = newVenue.Id}, newVenue );
         }
         catch (Exception e)
         {
