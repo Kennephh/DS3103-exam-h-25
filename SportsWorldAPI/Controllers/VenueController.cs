@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using SportsWorldAPI.Models;
 using SportsWorldAPI.Data;
-using Microsoft.Extensions.FileProviders;
 
 namespace SportsWorldAPI.Controllers;
 
