@@ -100,8 +100,20 @@ public class VenueController (ApplicationDbContext _appDbContext) : ControllerBa
         {
             if(id != updatedVenue.Id)
             {
-                return BadRequest("Error updating the venue ");
+                return BadRequest("Error updating the venue.");
             }
+            var existingVenue = await _appDbContext.Venues.FindAsync(id);
+            if(existingVenue == null)
+            {
+                return NotFound($"Venue with id: '{id}' not found.");
+            }
+            existingVenue.Id = updatedVenue.Id;
+            existingVenue.Name = updatedVenue.Name;
+            existingVenue.Capacity = updatedVenue.Capacity;
+            existingVenue.Image = updatedVenue.Image;
+
+            _appDbContext.Entry(updatedVenue).State = EntityState.Modified;
+            await _appDbContext.SaveChangesAsync();
             return NoContent();
         }
         catch (Exception e)
