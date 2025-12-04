@@ -69,7 +69,7 @@ public class VenueController (ApplicationDbContext _appDbContext) : ControllerBa
         }
         catch (Exception e)
         {
-            return StatusCode(500, $"Server sider error: {e.Message}");
+            return StatusCode(500, $"Server side error: {e.Message}");
         }
     }
 
@@ -89,7 +89,7 @@ public class VenueController (ApplicationDbContext _appDbContext) : ControllerBa
         }
         catch (Exception e)
         {
-            return StatusCode(500, $"Server sider error: {e.Message}");
+            return StatusCode(500, $"Server side error: {e.Message}");
         }
     }
 
@@ -107,18 +107,16 @@ public class VenueController (ApplicationDbContext _appDbContext) : ControllerBa
             {
                 return NotFound($"Venue with id: '{id}' not found.");
             }
-            existingVenue.Id = updatedVenue.Id;
             existingVenue.Name = updatedVenue.Name;
             existingVenue.Capacity = updatedVenue.Capacity;
             existingVenue.Image = updatedVenue.Image;
 
-            _appDbContext.Entry(updatedVenue).State = EntityState.Modified;
             await _appDbContext.SaveChangesAsync();
             return NoContent();
         }
         catch (Exception e)
         {
-            return StatusCode(500, $"Server sider error: {e.Message}");
+            return StatusCode(500, $"Server side error: {e.Message}");
         }
     }
 
