@@ -120,5 +120,25 @@ public class VenueController (ApplicationDbContext _appDbContext) : ControllerBa
         }
     }
 
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteVenue(int id)
+    {
+        try
+        {
+            var venueToDelete = await _appDbContext.Venues.FindAsync(id);
+            if(venueToDelete == null)
+            {
+                return NotFound($"Venue with id: '{id}' not found.");
+            }
+            _appDbContext.Venues.Remove(venueToDelete);
+            await _appDbContext.SaveChangesAsync();
+            return NoContent();
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, $"Server side error: {e.Message}");
+        }
+    }
+
 
 }
