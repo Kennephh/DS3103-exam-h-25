@@ -32,4 +32,113 @@ public class VenueController (ApplicationDbContext _appDbContext) : ControllerBa
         }
     }
 
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Venue>> GetVenueById(int id)
+    {
+        try
+        {
+            var venue = await _appDbContext.Venues.FindAsync(id);
+            if(venue == null)
+            {
+                return NotFound($"Venue with id: '{id}' not found.");
+            }
+            return Ok(venue);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, $"Server side error: {e.Message}");
+        }
+    }
+
+    [HttpGet("ByName/{name}")]
+    public async Task<ActionResult<Venue>> GetVenueByName(string name)
+    {
+        try
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return BadRequest("Venue name cannot be empty or whitespace.");
+            }
+            var venue = await _appDbContext.Venues.FirstOrDefaultAsync(venue => venue.Name == name);
+            
+            if(venue == null)
+            {
+                return NotFound($"Venue with name: '{name}' could not be found.");
+            }
+            return Ok(venue);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, $"Server side error: {e.Message}");
+        }
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<Venue>> PostVenue(Venue newVenue)
+    {
+        try
+        {
+            if(newVenue == null)
+            {
+                return BadRequest("Venue data is null.");
+            }
+            _appDbContext.Venues.Add(newVenue);
+            await _appDbContext.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetVenueById), new {id = newVenue.Id}, newVenue );
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, $"Server side error: {e.Message}");
+        }
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> PutVenue(int id, Venue updatedVenue)
+    {
+        try
+        {
+            if(id != updatedVenue.Id)
+            {
+                return BadRequest("Error updating the venue.");
+            }
+            var existingVenue = await _appDbContext.Venues.FindAsync(id);
+            if(existingVenue == null)
+            {
+                return NotFound($"Venue with id: '{id}' not found.");
+            }
+            existingVenue.Name = updatedVenue.Name;
+            existingVenue.Capacity = updatedVenue.Capacity;
+            existingVenue.Image = updatedVenue.Image;
+
+            await _appDbContext.SaveChangesAsync();
+            return NoContent();
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, $"Server side error: {e.Message}");
+        }
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteVenue(int id)
+    {
+        try
+        {
+            var venueToDelete = await _appDbContext.Venues.FindAsync(id);
+            if(venueToDelete == null)
+            {
+                return NotFound($"Venue with id: '{id}' not found.");
+            }
+            _appDbContext.Venues.Remove(venueToDelete);
+            await _appDbContext.SaveChangesAsync();
+            return NoContent();
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, $"Server side error: {e.Message}");
+        }
+    }
+
+
 }

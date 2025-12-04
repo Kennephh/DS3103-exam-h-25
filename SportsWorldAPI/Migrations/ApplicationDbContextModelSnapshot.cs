@@ -16,7 +16,7 @@ namespace SportsWorldAPI.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.0");
 
-            modelBuilder.Entity("SportsWorldApi.Models.Athlete", b =>
+            modelBuilder.Entity("SportsWorldAPI.Models.Athlete", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -40,6 +40,46 @@ namespace SportsWorldAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Athletes");
+                });
+
+            modelBuilder.Entity("SportsWorldAPI.Models.Finance", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MoneyLeft")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MoneySpent")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("NumberOfPurchases")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Finances");
+                });
+
+            modelBuilder.Entity("SportsWorldAPI.Models.Venue", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Capacity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Venues");
                 });
 #pragma warning restore 612, 618
         }
