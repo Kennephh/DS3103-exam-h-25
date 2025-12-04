@@ -93,7 +93,7 @@ public class VenueController (ApplicationDbContext _appDbContext) : ControllerBa
         }
     }
 
-    [HttpPut]
+    [HttpPut("{id}")]
     public async Task<IActionResult> PutVenue(int id, Venue updatedVenue)
     {
         try
