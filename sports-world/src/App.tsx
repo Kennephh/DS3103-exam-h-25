@@ -1,4 +1,3 @@
-import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import AdministerAthletesPage from './pages/AdministerAthletesPage'
 import AppLayout from './components/layout/AppLayout'

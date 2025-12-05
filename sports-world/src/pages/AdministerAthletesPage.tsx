@@ -1,8 +1,9 @@
+import AthleteList from "../components/AthleteList"
 
 
 const AdministerAthletesPage = () => {
     return(
-        <h2>Administrere utøvere kommer her</h2>
+        <AthleteList />
     )
 }
 
