@@ -67,7 +67,19 @@ public class FinanceController( ApplicationDbContext _applicationDbContext ) : C
     } // POST END
 
 
-    
+    [HttpPut("purchase/{athleteId}")]
+    public async Task<ActionResult> PurchaseAthlete(int athleteId)
+    {
+        try
+        {
+            var athlete = await _applicationDbContext.Athletes.FindAsync(athleteId);
+            if(athlete == null) return NotFound();
+        }
+        catch
+        {
+            
+        }
+    }
 }
 
 
