@@ -15,11 +15,10 @@ const AthleteList = () => {
     }, []);
 
     return (
-        <section className="m-3">
-            <h2>List of athletes: </h2>
+        <section className="p-4">
             <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                {athletes.map((athlete, index) => (
-                    <li key={athlete.name + index}>
+                {athletes.map((athlete) => (
+                    <li key={athlete.id}>
                         <AthleteItem athlete={athlete} />
                     </li>
                 ))}

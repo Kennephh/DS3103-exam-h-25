@@ -2,6 +2,7 @@ import type { IAthlete } from "../interfaces/IAthlete";
 import type { FC } from "react";
 
 const AthleteItem: FC<{ athlete: IAthlete }> = ({ athlete }) => {
+
     return (
         <article className="
             h-full
@@ -21,6 +22,9 @@ const AthleteItem: FC<{ athlete: IAthlete }> = ({ athlete }) => {
             transition-all
             duration-100
         ">
+            {athlete.image && (
+                <img src={athlete.image} alt={athlete.name} className="w-full h-48 object-cover rounded-md mb-4" />
+            )}
             <h3 className="text-xl font-bold mb-2 text-green-950">{athlete.name}</h3>
             <p className="text-green-900"><span className="font-semibold">Gender:</span> {athlete.gender}</p>
             <p className="text-green-900"><span className="font-semibold">Price:</span> {athlete.price}</p>
