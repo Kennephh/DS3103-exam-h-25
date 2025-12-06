@@ -1,9 +1,9 @@
-import './App.css'
 import { Routes, Route } from 'react-router-dom'
-import AdministerAthletesPage from './pages/AdministerAthletesPage'
 import AppLayout from './components/layout/AppLayout'
 import HomePage from './pages/HomePage'
 import NotFoundPage from './pages/NotFoundPage'
+import AdministerAthletesPage from './pages/AdministerAthletesPage'
+import RegisterAthletePage from './pages/RegisterAthletePage'
 
 function App() {
 
@@ -13,6 +13,7 @@ function App() {
         <Route index element={<HomePage />} />
 
         <Route path="athletes" element={<AdministerAthletesPage />} />
+        <Route path="register-athlete" element={<RegisterAthletePage />} />
 
         <Route path="*" element={<NotFoundPage />} />
       </Route>
