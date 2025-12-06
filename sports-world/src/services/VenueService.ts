@@ -52,4 +52,12 @@ const getVenueByName = async (name: string) : Promise<IVenueResponse> => {
     }
 }
 
-export default {getAllVenues, getVenueById, getVenueByName, }
+const createVenue = async (createdVenue: IVenue) => {
+    try {
+        const response = await axios.post(endpoint + createVenue);
+    } catch (error) {
+        
+    }
+}
+
+export default {getAllVenues, getVenueById, getVenueByName, createVenue, }
