@@ -36,6 +36,8 @@ public class FinanceController( ApplicationDbContext _applicationDbContext ) : C
     {
         try{
             var finances = await _applicationDbContext.Finances.SingleOrDefaultAsync(); // Henter en
+            if(finances == null) return NotFound("Finances not found");
+
             return Ok(finances);
         }
         catch
@@ -45,16 +47,14 @@ public class FinanceController( ApplicationDbContext _applicationDbContext ) : C
     } // GET END
 
     // POST
-    [HttpPost("loan")]
+    [HttpPost("loan")] // legge til gjeldSum?
     public async Task<ActionResult> GetLoan([FromBody] int loanAmount)
     {
         try
         {
            var finances = await _applicationDbContext.Finances.FirstOrDefaultAsync();
-           if (finances == null)
-            {
-                return NotFound("Finances not found");
-            }
+           if (finances == null) return NotFound("Finances not found");
+            
             
             finances.MoneyLeft += loanAmount; // Plusser antall penger på bok med penger lånt
             await _applicationDbContext.SaveChangesAsync();
@@ -68,16 +68,22 @@ public class FinanceController( ApplicationDbContext _applicationDbContext ) : C
 
 
     [HttpPut("purchase/{athleteId}")]
-    public async Task<ActionResult> PurchaseAthlete(int athleteId)
+    public async Task<ActionResult> UpdateFinance(int athletePrice)
     {
         try
         {
-            var athlete = await _applicationDbContext.Athletes.FindAsync(athleteId);
-            if(athlete == null) return NotFound();
+            var finance = await _applicationDbContext.Finances.SingleOrDefaultAsync();
+            if(finance == null) return NotFound("Finances not found");
+
+            finance.MoneyLeft -= athletePrice;
+            finance.MoneySpent += athletePrice;
+            await _applicationDbContext.SaveChangesAsync();
+            return Ok(finance);
+            
         }
         catch
         {
-            
+            return StatusCode(500,"Server side error when updating finances");
         }
     }
 }
