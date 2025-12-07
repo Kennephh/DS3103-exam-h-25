@@ -5,8 +5,8 @@ namespace SportsWorldAPI.Data
 {
     public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
     {
-        public DbSet<Venue> Venues {get; set;}
         public DbSet<Athlete> Athletes { get; set; }
+        public DbSet<Venue> Venues {get; set;}
         public DbSet<Finance> Finances { get; set; }
 
 
@@ -125,6 +125,64 @@ namespace SportsWorldAPI.Data
                 }
             );
 
+            modelBuilder.Entity<Venue>().HasData(
+                new Venue 
+                { 
+                    Id = 1, 
+                    Name = "T-Mobile Arena", 
+                    Capacity = 20000, 
+                    Image = "/images/venues/t-mobile-arena.jpg"
+                },
+                new Venue 
+                { 
+                    Id = 2, 
+                    Name = "Madison Square Garden", 
+                    Capacity = 20789, 
+                    Image = "/images/venues/madison-square-garden.jpg"
+                },
+                new Venue 
+                { 
+                    Id = 3, 
+                    Name = "The O2 Arena", 
+                    Capacity = 20000, 
+                    Image = "/images/venues/the-o2-arena.png" 
+                },
+                new Venue 
+                { 
+                    Id = 4, 
+                    Name = "Etihad Arena", 
+                    Capacity = 18000, 
+                    Image = "/images/venues/etihad-arena.jpeg" 
+                },
+                new Venue 
+                { 
+                    Id = 5, 
+                    Name = "Saitama Super Arena", 
+                    Capacity = 36500, 
+                    Image = "/images/venues/saitama-super-arena.jpg" 
+                },
+                new Venue 
+                { 
+                    Id = 6,
+                    Name = "Singapore Indoor Stadium", 
+                    Capacity = 12000, 
+                    Image = "/images/venues/singapore-indoor-stadium.jpg" 
+                },
+                new Venue 
+                { 
+                    Id = 7,
+                    Name = "Mohegan Sun Arena", 
+                    Capacity = 10000, 
+                    Image = "/images/venues/mohegan-sun-arena.png" 
+                },
+                new Venue 
+                { 
+                    Id = 8, 
+                    Name = "Jeunesse Arena", 
+                    Capacity = 15400, 
+                    Image = "/images/venues/jeunesse-arena.jpg" 
+                }
+            );
         }
     }
 }

@@ -15,7 +15,7 @@ const getAllVenues = async () : Promise<IVenueResponse> => {
         console.error("Axios error fetching all venues: ", error);
         return {
             success: false,
-            data: null
+            data: []
         }
     }
 }
@@ -52,12 +52,52 @@ const getVenueByName = async (name: string) : Promise<IVenueResponse> => {
     }
 }
 
-const createVenue = async (createdVenue: IVenue) => {
+const createVenue = async (newVenue: IVenue): Promise<IVenueResponse> => {
     try {
-        const response = await axios.post(endpoint + createVenue);
+        const response = await axios.post(endpoint, newVenue);
+        return {
+            success: true,
+            data: response.data
+        }
     } catch (error) {
-        
+        console.error(`Axios error creating new venue: `, error);
+        return {
+            success: false,
+            data: null
+        }
     }
 }
 
-export default {getAllVenues, getVenueById, getVenueByName, createVenue, }
+const updateVenue = async (updatedVenue: IVenue): Promise<IVenueResponse> => {
+    try {
+        const response = await axios.put(endpoint + "/" + updatedVenue.id, updatedVenue);
+        return {
+            success: true,
+            data: response.data
+        }
+    } catch (error) {
+        console.error("Axios error updating the venue: ", error);
+        return{
+            success: false,
+            data: null
+        }
+    }
+}
+
+const deleteVenue = async (id: number) => {
+    try {
+        const response = await axios.delete(endpoint + "/" + id);
+        return {
+            success: true,
+            data: response.data
+        }
+    } catch (error) {
+        console.error("Axios error deleting the venue: ", error);
+        return {
+            success: false,
+            data: null
+        }
+    }
+}
+
+export default { getAllVenues, getVenueById, getVenueByName, createVenue, updateVenue, deleteVenue }
