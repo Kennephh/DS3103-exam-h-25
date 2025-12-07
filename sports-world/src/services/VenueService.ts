@@ -100,4 +100,4 @@ const deleteVenue = async (id: number) => {
     }
 }
 
-export default {getAllVenues, getVenueById, getVenueByName, createVenue, updateVenue, deleteVenue}
+export default { getAllVenues, getVenueById, getVenueByName, createVenue, updateVenue, deleteVenue }
