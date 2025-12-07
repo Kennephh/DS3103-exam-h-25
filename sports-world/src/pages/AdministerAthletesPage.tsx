@@ -7,7 +7,7 @@ const AdministerAthletesPage = () => {
         <>
             <div className="py-4">
                 <Link to="/register-athlete"
-                    className="bg-emerald-600 text-white font-bold py-2 px-4 rounded hover:bg-emerald-700">
+                    className="bg-sky-600 text-white font-bold py-2 px-4 rounded hover:bg-sky-700">
                     + New Athlete
                 </Link>
             </div>

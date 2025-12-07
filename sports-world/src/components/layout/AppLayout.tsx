@@ -4,7 +4,7 @@ import { Link, Outlet } from "react-router-dom";
 const AppLayout = () => {
     return (
         <div className="min-h-screen bg-gray-100">
-            <nav className="bg-emerald-600 p-4 text-white shadow-md">
+            <nav className="bg-sky-600 p-4 text-white shadow-md">
                 <div className="container mx-auto flex justify-between">
                     <Link to="/" className="font-bold text-xl">SportsWorld</Link>
                     <ul className="flex gap-4">

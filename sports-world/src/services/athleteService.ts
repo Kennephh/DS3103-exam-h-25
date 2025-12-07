@@ -1,7 +1,8 @@
 import axios from "axios";
 import { type IAthlete } from "../interfaces/IAthlete";
+import { API_PATHS } from "../config";
 
-const endpoint = "http://localhost:5103/api/athletes";
+const endpoint = API_PATHS.ATHLETES;
 
 const getAllAthletes = async () : Promise<IAthlete[]> => {
     try {
