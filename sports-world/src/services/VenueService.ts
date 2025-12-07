@@ -15,7 +15,7 @@ const getAllVenues = async () : Promise<IVenueResponse> => {
         console.error("Axios error fetching all venues: ", error);
         return {
             success: false,
-            data: null
+            data: []
         }
     }
 }
@@ -52,11 +52,12 @@ const getVenueByName = async (name: string) : Promise<IVenueResponse> => {
     }
 }
 
-const createVenue = async (createdVenue: IVenue) => {
+const createVenue = async (createdVenue: IVenue): Promise<IVenueResponse> => {
     try {
-        const response = await axios.post(endpoint + createVenue);
-    } catch (error) {
+        const response = await axios.post(endpoint, createVenue);
         
+    } catch (error) {
+        console.error(`Axios error creating new venue`, error);
     }
 }
 
