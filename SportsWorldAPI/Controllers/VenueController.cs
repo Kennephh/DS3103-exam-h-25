@@ -51,7 +51,7 @@ public class VenueController (ApplicationDbContext _appDbContext) : ControllerBa
     }
 
     [HttpGet("ByName/{name}")]
-    public async Task<ActionResult<Venue>> GetVenueByName(string name)
+    public async Task<ActionResult<List<Venue>>> GetVenueByName(string name)
     {
         try
         {
@@ -59,13 +59,17 @@ public class VenueController (ApplicationDbContext _appDbContext) : ControllerBa
             {
                 return BadRequest("Venue name cannot be empty or whitespace.");
             }
-            var venue = await _appDbContext.Venues.FirstOrDefaultAsync(venue => venue.Name == name);
-            
-            if(venue == null)
+            var venues = await _appDbContext.Venues.
+            Where(venue => 
+            venue.Name != null &&
+            venue.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
+            .ToListAsync();
+
+            if(venues.Count == 0)
             {
-                return NotFound($"Venue with name: '{name}' could not be found.");
+                return Ok(new List<Venue>());
             }
-            return Ok(venue);
+            return Ok(venues);
         }
         catch (Exception e)
         {
