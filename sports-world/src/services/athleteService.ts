@@ -16,7 +16,7 @@ const getAllAthletes = async () : Promise<IAthlete[]> => {
 
 const getAthleteById = async (id: number) : Promise<IAthlete | undefined> => {
     try{
-        const response = await axios.get<IAthlete>(`${API_PATHS.ATHLETES}/${id}`);
+        const response = await axios.get<IAthlete>(`${endpoint}/${id}`);
         return response.data
     } catch (error) {
         console.error(`Error fetching athlete with id ${id}`, error);
@@ -24,7 +24,29 @@ const getAthleteById = async (id: number) : Promise<IAthlete | undefined> => {
     }
 }
 
+const getAthleteByName = async (name: string) : Promise<IAthlete[]> => {
+    try{
+        const response = await axios.get<IAthlete[]>(`${endpoint}/search?name=${name}`);
+        return response.data;
+    } catch (error) {
+        console.error(`Error fetching athlete with name ${name}`, error);
+        return [];
+    }
+}
+
+const createAthlete = async (newAthlete: IAthlete) : Promise<IAthlete | undefined> => {
+    try{
+        const response = await axios.post<IAthlete>(endpoint, newAthlete);
+        return response.data;
+    } catch (error) {
+        console.error("Error creating athlete", error);
+        return undefined;
+    }
+}
+
 export {
     getAllAthletes,
-    getAthleteById
+    getAthleteById,
+    getAthleteByName,
+    createAthlete
 }
