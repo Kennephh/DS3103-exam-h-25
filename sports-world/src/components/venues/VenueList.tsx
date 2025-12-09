@@ -1,6 +1,6 @@
-import {type IVenue } from "../interfaces/IVenue";
+import {type IVenue } from "../../interfaces/IVenue";
 import { useState, useEffect } from "react";
-import VenueService from "../services/VenueService";
+import VenueService from "../../services/VenueService";
 import VenueItem from "./VenueItem";
 
 const VenueList = () => {
@@ -29,11 +29,20 @@ const VenueList = () => {
     }
 
     return(
+        <>
+            <div>
+                <input type="text"
+                    placeholder="Search venues.." 
+                    
+                    
+                
+                />
+            </div>
 
-        <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            { getVenueJSX() }
-        </section>
-
+            <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                { getVenueJSX() }
+            </section>
+        </>
     )
 
 }

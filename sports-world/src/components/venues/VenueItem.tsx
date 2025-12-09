@@ -1,11 +1,20 @@
-import {type IVenue } from "../interfaces/IVenue";
-import { API_BASE_URL } from "../config";
+import {type IVenue } from "../../interfaces/IVenue";
+import { API_BASE_URL } from "../../config";
 
 export interface IVenueItemProps{
     venue: IVenue
 }
 
 const VenueItem = ({venue}: IVenueItemProps) => {
+    const btnClasses = `
+        bg-sky-600
+        text-white
+        px-3
+        py-1
+        rounded
+        hover:bg-sky-700
+        hover:cursor-pointer
+    `;
 
     return(
         <article className="
@@ -28,6 +37,10 @@ const VenueItem = ({venue}: IVenueItemProps) => {
             <p>
                 Capacity: {venue.capacity}
             </p>
+            <div className="m-2 flex justify-end gap-2">
+                <button className={btnClasses}>Edit</button>
+                <button className={btnClasses}>Delete</button>
+            </div>
         </article>
     );
 

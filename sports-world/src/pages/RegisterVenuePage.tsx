@@ -5,8 +5,8 @@ const RegisterVenuePage = () => {
 
     return(
         <>
-            <h2>Her kommer reg av venues</h2>
-            
+            <h2>Reg av venues kommer her</h2>
+
 
         </>
     )

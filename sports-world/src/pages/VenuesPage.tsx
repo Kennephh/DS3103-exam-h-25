@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import VenueList from "../components/VenueList";
+import VenueList from "../components/venues/VenueList";
 
 const VenuesPage = () => {
     return (
