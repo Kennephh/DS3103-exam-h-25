@@ -23,7 +23,7 @@ const VenueItem = ({venue}: IVenueItemProps) => {
                 {venue.name}
             </h2>
             <div className="h-48 w-full bg-gray-200 rounded-md mb-4 overflow-hidden">
-                <img src={API_BASE_URL + venue.image} alt={venue.name} />
+                <img src={API_BASE_URL + venue.image} alt={venue.name} className="w-full aspect-3/4 object-cover rounded-t"/>
             </div>
             <p>
                 Capacity: {venue.capacity}
