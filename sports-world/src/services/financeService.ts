@@ -6,39 +6,27 @@ import {type IFinanceResponse} from "../interfaces/ResponseInterfaces";
 
 const endpoint = API_PATHS.FINANCE;
 
-const getFinance = async () : Promise<IFinanceResponse | undefined> => {
+const getFinance = async () : Promise<IFinance | undefined> => {
     try{
         const response = await axios.get<IFinance>(`${endpoint}`);
-        return{
-            success : true,
-            data : response.data
-        }
+        return response.data
     } catch (error) {
         console.error("Error fetching finances", error);
-        return {
-            success : false,
-            data : null
-        }
+        return undefined
     }
 }
 
-const postFinance = async (newFinance : IFinance) : Promise<IFinanceResponse | undefined> => {
+const postFinance = async (newFinance : IFinance) : Promise <IFinance | undefined> => {
     try{
         const response = await axios.post<IFinance>(endpoint, newFinance);
-        return{
-            success : true,
-            data : response.data
-        }
+        return response.data
     } catch (error) {
         console.error("Error posting finances", error);
-        return {
-            success : false,
-            data : null
-        }
+        return undefined
     }
 }
 
-const putFinance = async (newFinance : IFinance) : Promise<IFinanceResponse | undefined> => {
+const putFinance = async (newFinance : IFinance) : Promise<IFinance | undefined> => {
     try{
         const response = await axios.put(endpoint, newFinance);
         return{
@@ -53,3 +41,5 @@ const putFinance = async (newFinance : IFinance) : Promise<IFinanceResponse | un
         }
     }
 }
+
+export default {getFinance, postFinance, putFinance}
