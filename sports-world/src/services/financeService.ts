@@ -1,7 +1,6 @@
 import axios from "axios";
 import {type IFinance} from "../interfaces/IFinance";
 import { API_PATHS } from "../config";
-import {type IFinanceResponse} from "../interfaces/ResponseInterfaces";
 
 
 const endpoint = API_PATHS.FINANCE;
@@ -29,16 +28,11 @@ const postFinance = async (newFinance : IFinance) : Promise <IFinance | undefine
 const putFinance = async (newFinance : IFinance) : Promise<IFinance | undefined> => {
     try{
         const response = await axios.put(endpoint, newFinance);
-        return{
-            success : true,
-            data : response.data
+        return response.data
         }
-    } catch (error) {
+     catch (error) {
         console.error("Error updating finances", error);
-        return {
-            success : false,
-            data : null
-        }
+        return undefined
     }
 }
 
