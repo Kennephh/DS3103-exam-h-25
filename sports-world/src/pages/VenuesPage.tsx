@@ -9,7 +9,7 @@ const VenuesPage = () => {
                 <div className="pb-4">
                     <Link to="/register-venue" 
                         className="bg-sky-600 text-white py-2 px-4 rounded hover:bg-sky-700">
-                    + Register New Venue
+                    Manage Venues
                     </Link>
                 </div>
                 <VenueList/>

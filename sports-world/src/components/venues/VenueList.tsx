@@ -1,26 +1,17 @@
-import {type IVenue } from "../../interfaces/IVenue";
-import { useState, useEffect } from "react";
-import VenueService from "../../services/VenueService";
 import VenueItem from "./VenueItem";
+import useVenues from "../../customhooks/useVenues";
+import SearchVenue from "./SearchVenue";
 
 const VenueList = () => {
-    const [venues, setVenues] = useState<IVenue[]>([]);
 
-    useEffect(() => {
-        const fetchVenues = async () => {
-            const result = await VenueService.getAllVenues();
-            if(result.success && Array.isArray(result.data)){
-                setVenues(result.data);
-            }
-        };
-        fetchVenues();
-    }, []);
+    const {venues, isLoading, errorMessage, userSearch, setUserSearch} = useVenues();
+    
 
     const getVenueJSX = () => {
-        const venueJSX = venues.map( (venue, index) => {
+        const venueJSX = venues.map( (venue) => {
             return (
                 <VenueItem
-                    key={"venue" + index}
+                    key={venue.id}
                     venue={venue}
                 />
             )
@@ -30,17 +21,18 @@ const VenueList = () => {
 
     return(
         <>
-            <div>
-                <input type="text"
-                    placeholder="Search venues.." 
-                    
-                    
-                
-                />
-            </div>
+            <SearchVenue onSearch={setUserSearch}/>
 
             <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-                { getVenueJSX() }
+
+                {isLoading ? (
+                    <p>Loading..</p>
+                ) : errorMessage ? (
+                    <p>{errorMessage}</p>
+                ) : (
+                    getVenueJSX()
+                )
+                }
             </section>
         </>
     )
