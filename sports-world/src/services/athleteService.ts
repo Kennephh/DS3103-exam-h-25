@@ -85,5 +85,7 @@ export {
     getAthleteById,
     getAthleteByName,
     createAthlete,
-    updateAthlete
+    updateAthlete,
+    deleteAthlete,
+    uploadImage
 }
