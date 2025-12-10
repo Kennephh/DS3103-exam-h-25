@@ -67,7 +67,7 @@ public class FinanceController( ApplicationDbContext _applicationDbContext ) : C
     } // POST END
 
 
-    [HttpPut("purchase/{athleteId}")]
+    [HttpPut("finances")]
     public async Task<ActionResult> UpdateFinance(int athletePrice)
     {
         try
