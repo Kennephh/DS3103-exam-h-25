@@ -6,6 +6,7 @@ import AdministerAthletesPage from './pages/AdministerAthletesPage'
 import RegisterAthletePage from './pages/RegisterAthletePage'
 import VenuesPage from './pages/VenuePage'
 import RegisterVenuePage from './pages/RegisterVenuePage'
+import FinancePage from './pages/FinancePage'
 
 function App() {
 
@@ -19,6 +20,8 @@ function App() {
 
         <Route path="venues" element={<VenuesPage />} />
         <Route path="register-venue" element={<RegisterVenuePage />} />
+
+        <Route path='finance' element={<FinancePage/>} />
 
         <Route path="*" element={<NotFoundPage />} />
       </Route>
