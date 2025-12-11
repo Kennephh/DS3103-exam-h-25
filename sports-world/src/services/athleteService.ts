@@ -39,8 +39,44 @@ const createAthlete = async (newAthlete: IAthlete) : Promise<IAthlete | undefine
         const response = await axios.post<IAthlete>(endpoint, newAthlete);
         return response.data;
     } catch (error) {
-        console.error("Error creating athlete", error);
+        console.error("Error creating athlete.", error);
         return undefined;
+    }
+}
+
+const updateAthlete = async (athleteToUpdate: IAthlete) : Promise<void> => {
+    try{
+        const url = `${endpoint}/${athleteToUpdate.id}`;
+        await axios.put(url, athleteToUpdate)
+    } catch (error) {
+        console.error("Error updating athlete.", error);
+        throw error;
+    }
+}
+
+const deleteAthlete = async (id: number) : Promise<void> => {
+    try{
+        const url = `${endpoint}/${id}`;
+        await axios.delete(url)
+    } catch (error) {
+        console.error("Error deleting athlete.", error);
+        throw error;
+    }
+}
+
+const uploadImage = async (img: File) : Promise<string | undefined> => {
+    try{
+        const formData = new FormData();
+        formData.append("img", img);
+        const response = await axios.post(API_PATHS.IMAGE_UPLOAD, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Error uploading image", error);
+        throw error;
     }
 }
 
@@ -48,5 +84,8 @@ export {
     getAllAthletes,
     getAthleteById,
     getAthleteByName,
-    createAthlete
+    createAthlete,
+    updateAthlete,
+    deleteAthlete,
+    uploadImage
 }

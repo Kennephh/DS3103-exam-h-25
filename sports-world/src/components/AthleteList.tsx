@@ -1,18 +1,12 @@
 import type { IAthlete } from "../interfaces/IAthlete";
-import { useEffect, useState } from "react";
-import { getAllAthletes } from "../services/athleteService";
+import type { FC } from "react";
 import AthleteItem from "./AthleteItem";
 
-const AthleteList = () => {
-    const [athletes, setAThletes] = useState<IAthlete[]>([]);
+interface AthleteListProps {
+    athletes: IAthlete[];
+}
 
-    useEffect(() => {
-        const fetchAthletes = async () => {
-            const data = await getAllAthletes();
-            if (data) setAThletes(data);
-        };
-        fetchAthletes();
-    }, []);
+const AthleteList: FC<AthleteListProps> = ({ athletes }) => {
 
     return (
         <section className="">

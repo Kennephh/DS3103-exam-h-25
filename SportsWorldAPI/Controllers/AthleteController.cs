@@ -63,7 +63,7 @@ public class AthletesController(ApplicationDbContext context) : ControllerBase
             var athletes = await context.Athletes
                 .Where( athlete =>
                     athlete.Name != null
-                    && athlete.Name.Contains(name, StringComparison.OrdinalIgnoreCase)
+                    && athlete.Name.ToLower().Contains(name.ToLower())
                 ).ToListAsync();
 
             if (athletes.Count == 0) return NotFound("No athletes found.");
