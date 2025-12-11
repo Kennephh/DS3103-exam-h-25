@@ -1,11 +1,10 @@
 import VenueItem from "./VenueItem";
-import useVenues from "../../customhooks/useVenues";
+import useVenues from "../../hooks/useVenues";
 import SearchVenue from "./SearchVenue";
 
 const VenueList = () => {
 
     const {venues, isLoading, errorMessage, userSearch, setUserSearch} = useVenues();
-    
 
     const getVenueJSX = () => {
         const venueJSX = venues.map( (venue) => {
@@ -22,21 +21,19 @@ const VenueList = () => {
     return(
         <>
             <SearchVenue onSearch={setUserSearch}/>
-
             <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-
                 {isLoading ? (
-                    <p>Loading..</p>
+                    <p>Loading...</p>
                 ) : errorMessage ? (
                     <p>{errorMessage}</p>
-                ) : (
-                    getVenueJSX()
+                ) : venues.length === 0 ? (
+                    <p>Could not find venues with the name: '{userSearch}'</p>
+                ) : ( getVenueJSX()
                 )
                 }
             </section>
         </>
     )
-
 }
 
 export default VenueList;
