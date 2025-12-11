@@ -1,22 +1,18 @@
 import { type IFinance } from "../../interfaces/IFinance";
 import {type IAthlete} from "../../interfaces/IAthlete";
-import { API_BASE_URL } from "../../config";
 
 export interface IFinanceProps{
     financials : IFinance // valgte å kalle det for financials da det skal representere flere økonomiske verdier
+    athletes : IAthlete[]
 }
 
-const FinancialSituationItem = ({financials} : IFinanceProps) => {
+const FinancialSituationItem = ({financials, athletes} : IFinanceProps) => {
 
-    const buttonClasses = `
-        bg-sky-600
-        text-white
-        px-3
-        py-1
-        rounded
-        hover:bg-sky-700
-        hover:cursor-pointer
-    `;
+    const countPurchasedAthletes = () => {
+        return athletes.reduce((count, athlete) => {
+            return count + (athlete.purchaseStatus ? 1 : 0);
+        }, 0);
+    }; // Summerer antall atleter som har purchaseStatus true
 
     return(
         <article className="
@@ -30,9 +26,14 @@ const FinancialSituationItem = ({financials} : IFinanceProps) => {
             hover:scale-102
             transition-all
         ">
-            <section>
-                <h3>Finacial overview</h3>
-            </section>
+            <div className="px-2 flex flex-col">
+                <h3 className="text-lg font-semibold mb-2">Financial overview</h3>
+                <p>Balance: {financials.moneyLeft}</p>
+                <p>Expenditure: {financials.moneySpent}</p>
+                <p>Athletes purchased: {countPurchasedAthletes()}</p>
+            </div>
         </article>
     );
 }
+
+export default FinancialSituationItem;
