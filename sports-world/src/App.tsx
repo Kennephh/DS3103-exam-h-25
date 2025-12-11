@@ -4,6 +4,8 @@ import HomePage from './pages/HomePage'
 import NotFoundPage from './pages/NotFoundPage'
 import AdministerAthletesPage from './pages/AdministerAthletesPage'
 import RegisterAthletePage from './pages/RegisterAthletePage'
+import VenuesPage from './pages/VenuesPage'
+import RegisterVenuePage from './pages/RegisterVenuePage'
 
 function App() {
 
@@ -14,6 +16,9 @@ function App() {
 
         <Route path="athletes" element={<AdministerAthletesPage />} />
         <Route path="register-athlete" element={<RegisterAthletePage />} />
+
+        <Route path="venues" element={<VenuesPage />} />
+        <Route path="register-venue" element={<RegisterVenuePage />} />
 
         <Route path="*" element={<NotFoundPage />} />
       </Route>
