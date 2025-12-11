@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom"
-import AthleteList from "../components/AthleteList"
-import { useEffect, useState } from "react";
-import { getAthleteByName, getAllAthletes } from "../services/athleteService";
+import { useEffect, useState, type HTMLInputTypeAttribute } from "react";
 import type { IAthlete } from "../interfaces/IAthlete";
+import AthleteList from "../components/AthleteList"
+import { getAthleteByName, getAllAthletes, deleteAthlete } from "../services/athleteService";
 
 
 const AdministerAthletesPage = () => {
 
-    const [athletes, setAThletes] = useState<IAthlete[]>([]);
+    const [athletes, setAthletes] = useState<IAthlete[]>([]);
 
     const fetchAthletes = async (searchQuery: string = "") => {
             let data;
@@ -17,7 +17,7 @@ const AdministerAthletesPage = () => {
                 data = await getAllAthletes();
             }
 
-            if (data) setAThletes(data);
+            if (data) setAthletes(data);
         };
 
     useEffect(() => {
@@ -27,6 +27,16 @@ const AdministerAthletesPage = () => {
     const handleSearch = async (event: React.ChangeEvent<HTMLInputElement>) => {
         fetchAthletes(event.target.value);
 
+    };
+
+    const handleDelete = async (id: number) => {
+        const confirmDel = window.confirm("Are you sure you want to delete this athlete?");
+        if (confirmDel) {
+            await deleteAthlete(id);
+            setAthletes(
+                athletes.filter(athlete => athlete.id !== id)
+            );
+        };
     };
 
     return(
@@ -47,7 +57,7 @@ const AdministerAthletesPage = () => {
                 />
             </div>
 
-            <AthleteList athletes={athletes}/>
+            <AthleteList athletes={athletes} onDelete={handleDelete}/>
         </div>
     )
 }

@@ -2,7 +2,12 @@ import type { IAthlete } from "../interfaces/IAthlete";
 import type { FC } from "react";
 import { API_BASE_URL } from "../config";
 
-const AthleteItem: FC<{ athlete: IAthlete }> = ({ athlete }) => {
+interface AthleteItemProps {
+    athlete: IAthlete;
+    onDelete: (id: number) => void;
+}
+
+const AthleteItem: FC<AthleteItemProps> = ({ athlete, onDelete }) => {
 
     const buttonClasses = `
         bg-sky-600
@@ -42,8 +47,8 @@ const AthleteItem: FC<{ athlete: IAthlete }> = ({ athlete }) => {
             </div>
 
             <div className="m-2 flex justify-end gap-2">
-                <button className={buttonClasses}>Edit</button>
-                <button className={buttonClasses}>Delete</button>
+                <button className={buttonClasses} >Edit</button>
+                <button className={buttonClasses} onClick={ () => { onDelete(athlete.id as number) } }>Delete</button>
             </div>
 
         </article>
