@@ -4,7 +4,11 @@ import HomePage from './pages/HomePage'
 import NotFoundPage from './pages/NotFoundPage'
 import AdministerAthletesPage from './pages/AdministerAthletesPage'
 import RegisterAthletePage from './pages/RegisterAthletePage'
+<<<<<<< HEAD
 import VenuesPage from './pages/VenuePage'
+=======
+import VenuePage from './pages/VenuePage'
+>>>>>>> 006ae3082caadcd3a7d5f0f6695439c8827a40a2
 import RegisterVenuePage from './pages/RegisterVenuePage'
 import FinancePage from './pages/FinancePage'
 
@@ -19,7 +23,7 @@ function App() {
         <Route path="register-athlete" element={<RegisterAthletePage />} />
         <Route path="edit-athlete/:id" element={<RegisterAthletePage />} />
 
-        <Route path="venues" element={<VenuesPage />} />
+        <Route path="venues" element={<VenuePage />} />
         <Route path="register-venue" element={<RegisterVenuePage />} />
 
         <Route path='finance' element={<FinancePage/>} />
