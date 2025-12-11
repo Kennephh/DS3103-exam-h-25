@@ -22,8 +22,6 @@ const FinancialSituationItem = ({financials, athletes} : IFinanceProps) => {
             bg-white
             rounded
             shadow-xl
-            hover:cursor-pointer
-            hover:scale-102
             transition-all
         ">
             <div className="px-2 flex flex-col">

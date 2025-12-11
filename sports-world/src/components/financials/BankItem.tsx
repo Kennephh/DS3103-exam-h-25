@@ -23,8 +23,6 @@ const BankItem = ({financials} : BankProps) => {
                 bg-white
                 rounded
                 shadow-xl
-                hover:cursor-pointer
-                hover:scale-105
                 transition-all
                 overflow-hidden
                 ">
