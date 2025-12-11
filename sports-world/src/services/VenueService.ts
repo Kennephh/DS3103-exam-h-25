@@ -1,8 +1,9 @@
 import axios from "axios";
 import { type IVenue, } from "../interfaces/IVenue";
 import {type IVenueResponse } from "../interfaces/ResponseInterfaces";
+import { API_PATHS } from "../config";
 
-const endpoint = "http://localhost:5103/api/venue";
+const endpoint = API_PATHS.VENUES
 
 const getAllVenues = async () : Promise<IVenueResponse> => {
     try {
