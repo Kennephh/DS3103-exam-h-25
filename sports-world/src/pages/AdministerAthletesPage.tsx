@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom"
-import { useEffect, useState, type HTMLInputTypeAttribute } from "react";
+import { Link, useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react";
 import type { IAthlete } from "../interfaces/IAthlete";
 import AthleteList from "../components/AthleteList"
 import { getAthleteByName, getAllAthletes, deleteAthlete } from "../services/athleteService";
@@ -10,15 +10,24 @@ const AdministerAthletesPage = () => {
     const [athletes, setAthletes] = useState<IAthlete[]>([]);
 
     const fetchAthletes = async (searchQuery: string = "") => {
-            let data;
-            if (searchQuery){
-                data = await getAthleteByName(searchQuery);
-            } else {
-                data = await getAllAthletes();
-            }
+        let data;
+        if (searchQuery){
+            data = await getAthleteByName(searchQuery);
+        } else {
+            data = await getAllAthletes();
+        }
 
-            if (data) setAthletes(data);
+        if (data) {
+            const sortedData = data.sort((a, b) => a.name.localeCompare(b.name));
+            setAthletes(sortedData);
         };
+    };
+
+    const navigate = useNavigate();
+
+    const handleEdit = async (id: number) => {
+        navigate(`/edit-athlete/${id}`);
+    };
 
     useEffect(() => {
         fetchAthletes();
@@ -57,7 +66,7 @@ const AdministerAthletesPage = () => {
                 />
             </div>
 
-            <AthleteList athletes={athletes} onDelete={handleDelete}/>
+            <AthleteList athletes={athletes} onDelete={handleDelete} onEdit={handleEdit}/>
         </div>
     )
 }

@@ -5,9 +5,10 @@ import { API_BASE_URL } from "../config";
 interface AthleteItemProps {
     athlete: IAthlete;
     onDelete: (id: number) => void;
+    onEdit: (id: number) => void;
 }
 
-const AthleteItem: FC<AthleteItemProps> = ({ athlete, onDelete }) => {
+const AthleteItem: FC<AthleteItemProps> = ({ athlete, onDelete, onEdit }) => {
 
     const buttonClasses = `
         bg-sky-600
@@ -47,7 +48,7 @@ const AthleteItem: FC<AthleteItemProps> = ({ athlete, onDelete }) => {
             </div>
 
             <div className="m-2 flex justify-end gap-2">
-                <button className={buttonClasses} >Edit</button>
+                <button className={buttonClasses} onClick={ () => { onEdit(athlete.id as number) } } >Edit</button>
                 <button className={buttonClasses} onClick={ () => { onDelete(athlete.id as number) } }>Delete</button>
             </div>
 

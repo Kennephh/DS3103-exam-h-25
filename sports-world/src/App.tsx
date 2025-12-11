@@ -17,6 +17,7 @@ function App() {
 
         <Route path="athletes" element={<AdministerAthletesPage />} />
         <Route path="register-athlete" element={<RegisterAthletePage />} />
+        <Route path="edit-athlete/:id" element={<RegisterAthletePage />} />
 
         <Route path="venues" element={<VenuesPage />} />
         <Route path="register-venue" element={<RegisterVenuePage />} />
