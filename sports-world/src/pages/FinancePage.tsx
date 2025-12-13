@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"
 import {type IAthlete } from "../interfaces/IAthlete";
 import {type IFinance } from "../interfaces/IFinance";
 import FinancialDashboardList from "../components/financials/FinancialDashboardList";
@@ -11,11 +11,16 @@ const FinancePage = () => {
     const [athletes, setAthletes] = useState<IAthlete[]>([]);
     
     const sampleFinancials: IFinance = {
-    moneyLeft: 10000,
-    moneySpent: 5000,
+    moneyLeft: 120000000,
+    moneySpent: 0,
     numberOfPurchases: 200
-    // Add other properties as defined in IFinance
 };
+
+     const navigate = useNavigate();
+
+    const handlePurchase = async (id: number) => {
+        navigate(`/edit-athlete/${id}`);
+    };
 
     const fetchAthletes = async () => {
             try {
@@ -36,7 +41,7 @@ const FinancePage = () => {
         <>
             <div className="container mx-auto h-[calc(100vh-4rem)] flex flex-col gap-4 p-4">
                 <FinancialDashboardList financials={sampleFinancials} athletes={athletes}/>
-                <AthleteList athletes={athletes} onDelete={() => {}} onEdit={() => {}} />
+                <AthleteList athletes={athletes} onPurchase={handlePurchase}/>
             </div>
         </>
     )
