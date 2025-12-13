@@ -1,10 +1,10 @@
 
-export interface IVenueSearchProps{
+export interface ISearchBarProps{
     onSearch: (search: string) => void;
     placeholder?: string
 }
 
-const SearchVenue = ({onSearch, placeholder}: IVenueSearchProps) => {
+const SearchVenue = ({onSearch, placeholder}: ISearchBarProps) => {
     return (
         <div className="mb-4">
                 <input type="text"
