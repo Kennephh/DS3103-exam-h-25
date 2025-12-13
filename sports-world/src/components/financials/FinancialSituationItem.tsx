@@ -1,5 +1,6 @@
 import { type IFinance } from "../../interfaces/IFinance";
 import {type IAthlete} from "../../interfaces/IAthlete";
+// Må hente inn financeService og populere db
 
 export interface IFinanceProps{
     financials : IFinance // valgte å kalle det for financials da det skal representere flere økonomiske verdier

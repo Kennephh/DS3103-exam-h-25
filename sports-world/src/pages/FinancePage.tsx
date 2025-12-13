@@ -1,9 +1,9 @@
-import { Link, useNavigate } from "react-router-dom"
 import {type IAthlete } from "../interfaces/IAthlete";
 import {type IFinance } from "../interfaces/IFinance";
 import FinancialDashboardList from "../components/financials/FinancialDashboardList";
 import { useEffect, useState } from "react";
-import { getAllAthletes } from "../services/athleteService";
+import { getAllAthletes, updateAthlete  } from "../services/athleteService";
+import {} from "../services/financeService";
 import AthleteList from "../components/AthleteList"
 
 
@@ -16,10 +16,28 @@ const FinancePage = () => {
     numberOfPurchases: 200
 };
 
-     const navigate = useNavigate();
-
     const handlePurchase = async (id: number) => {
-        navigate(`/edit-athlete/${id}`);
+
+        try {
+            const athleteToUpdate = athletes.find(athlete => athlete.id === id);
+            if (!athleteToUpdate) {
+                alert("Athlete not found");
+                return;
+            }
+
+            const updatedAthlete = { ...athleteToUpdate, purchaseStatus: true };
+
+            await updateAthlete(updatedAthlete);
+
+            setAthletes(prevAthletes => 
+                prevAthletes.map(athlete => 
+                    athlete.id === id ? updatedAthlete : athlete
+                )
+            );
+        } catch (error) {
+            alert("Error updating athlete purchase status");
+        }
+        
     };
 
     const fetchAthletes = async () => {
@@ -29,7 +47,7 @@ const FinancePage = () => {
                 const notPurchasedAthletes = allAthletes.filter(athlete => athlete.purchaseStatus == false);
                 setAthletes(notPurchasedAthletes);
             } catch (error) {
-                console.error("Error fetching athletes, FinancePage", error);
+                alert("Error fetching athletes, FinancePage");
             }
         };
 
