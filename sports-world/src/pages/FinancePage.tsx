@@ -3,10 +3,12 @@ import {type IAthlete } from "../interfaces/IAthlete";
 import {type IFinance } from "../interfaces/IFinance";
 import FinancialDashboardList from "../components/financials/FinancialDashboardList";
 import { useEffect, useState } from "react";
+import { getAllAthletes } from "../services/athleteService";
+import AthleteList from "../components/AthleteList"
 
 
 const FinancePage = () => {
-    const [athletes, setAThletes] = useState<IAthlete[]>([]);
+    const [athletes, setAthletes] = useState<IAthlete[]>([]);
     
     const sampleFinancials: IFinance = {
     moneyLeft: 10000,
@@ -15,18 +17,26 @@ const FinancePage = () => {
     // Add other properties as defined in IFinance
 };
 
-const sampleAthlete: IAthlete = {
-    id: 4444444,
-    name: "Bird Shit",
-    gender : "Woman",
-    price: 2,
-    image: "kkkkkkkkk",
-    purchaseStatus: false
-}
+    const fetchAthletes = async () => {
+            try {
+                const allAthletes = await getAllAthletes();
+                // Filter athletes that are not purchased
+                const notPurchasedAthletes = allAthletes.filter(athlete => athlete.purchaseStatus == false);
+                setAthletes(notPurchasedAthletes);
+            } catch (error) {
+                console.error("Error fetching athletes, FinancePage", error);
+            }
+        };
+
+         useEffect(() => {
+        fetchAthletes();
+    }, []);
+
     return(
         <>
             <div className="container mx-auto h-[calc(100vh-4rem)] flex flex-col gap-4 p-4">
                 <FinancialDashboardList financials={sampleFinancials} athletes={athletes}/>
+                <AthleteList athletes={athletes} onDelete={() => {}} onEdit={() => {}} />
             </div>
         </>
     )
