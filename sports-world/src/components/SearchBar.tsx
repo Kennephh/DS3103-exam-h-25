@@ -4,7 +4,7 @@ export interface ISearchBarProps{
     placeholder?: string
 }
 
-const SearchVenue = ({onSearch, placeholder}: ISearchBarProps) => {
+const SearchBar = ({onSearch, placeholder}: ISearchBarProps) => {
     return (
         <div className="mb-4">
                 <input type="text"
@@ -18,4 +18,4 @@ const SearchVenue = ({onSearch, placeholder}: ISearchBarProps) => {
 
 }
 
-export default SearchVenue;
+export default SearchBar;
