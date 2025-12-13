@@ -1,6 +1,6 @@
-import type { IAthlete } from "../interfaces/IAthlete";
+import type { IAthlete } from "../../interfaces/IAthlete";
 import type { FC } from "react";
-import { API_BASE_URL } from "../config";
+import { API_BASE_URL } from "../../config";
 
 interface AthleteItemProps {
     athlete: IAthlete;

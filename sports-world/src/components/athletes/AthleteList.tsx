@@ -1,4 +1,4 @@
-import type { IAthlete } from "../interfaces/IAthlete";
+import type { IAthlete } from "../../interfaces/IAthlete";
 import type { FC } from "react";
 import AthleteItem from "./AthleteItem";
 
