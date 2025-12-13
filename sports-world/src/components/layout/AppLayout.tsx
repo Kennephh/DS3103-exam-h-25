@@ -2,9 +2,9 @@ import { Link, Outlet } from "react-router-dom";
 
 const AppLayout = () => {
   return (
-      <div className="min-h-screen bg-gray-100 flex flex-col">
+      <div className="h-screen bg-gray-100 flex flex-col">
 
-          <nav className="bg-sky-600 p-4 text-white shadow-md">
+          <nav className="bg-sky-600 p-4 text-white shadow-md flex-shrink-0">
               <div className="container mx-auto flex justify-between items-center">
                   <Link to="/" className="text-xl font-bold">SportsWorld</Link>
                   <ul className="flex gap-4">
@@ -15,7 +15,7 @@ const AppLayout = () => {
               </div>
           </nav>
 
-        <main className="grow">
+        <main className="flex-grow overflow-y-auto">
           <Outlet />
         </main>
 

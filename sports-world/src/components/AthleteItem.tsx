@@ -52,14 +52,17 @@ const AthleteItem: FC<AthleteItemProps> = ({ athlete, onDelete, onEdit, onPurcha
             bg-white
             rounded
             shadow-xl
-            hover:cursor-pointer
-            hover:scale-105
+            hover:scale-102
             transition-all
-            overflow-hidden
             ">
 
             {athlete.image && (
-                <img src={API_BASE_URL + athlete.image} alt={athlete.name} className="w-full aspect-3/4 object-cover rounded-t border border-black/75" />
+                <img src={API_BASE_URL + athlete.image} alt={athlete.name} className="
+                w-full
+                aspect-3/4
+                object-cover
+                rounded-t
+                " />
             )}
 
             <div className="px-2 flex flex-col">

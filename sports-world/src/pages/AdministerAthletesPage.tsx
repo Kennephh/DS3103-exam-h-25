@@ -50,17 +50,17 @@ const AdministerAthletesPage = () => {
 
     return(
         <div className="container mx-auto h-[calc(100vh-4rem)] flex flex-col gap-4 p-4">
-            <div className="pb-4">
+            <div>
                 <Link to="/register-athlete"
-                    className="bg-sky-600 text-white py-2 px-4 rounded hover:bg-sky-700">
-                    + Register New Athlete
+                    className="bg-sky-600 text-white p-2 rounded hover:bg-sky-700">
+                    Register New Athlete
                 </Link>
             </div>
 
-            <div className="flex gap-2 mb-4">
+            <div className="flex gap-2">
                 <input
                     type="text"
-                    placeholder="Search by name..."
+                    placeholder="Search by name.."
                     className="border p-2 rounded w-full"
                     onChange={handleSearch}
                 />
