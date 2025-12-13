@@ -4,11 +4,36 @@ import { API_BASE_URL } from "../config";
 
 interface AthleteItemProps {
     athlete: IAthlete;
-    onDelete: (id: number) => void;
-    onEdit: (id: number) => void;
+    onDelete?: (id: number) => void;
+    onEdit?: (id: number) => void;
+    onPurchase?: (id: number) => void;
 }
 
-const AthleteItem: FC<AthleteItemProps> = ({ athlete, onDelete, onEdit }) => {
+const AthleteItem: FC<AthleteItemProps> = ({ athlete, onDelete, onEdit, onPurchase }) => {
+
+    const handleDelete = () => {
+        if (onDelete && athlete.id !== undefined) {
+            onDelete(athlete.id);
+        } else {
+            console.warn("Cannot delete athlete without a valid ID.");
+        }
+    };
+
+    const handleEdit = () => {
+        if (onEdit && athlete.id !== undefined) {
+            onEdit(athlete.id);
+        } else {
+            console.warn("Cannot edit athlete without a valid ID.");
+        }
+    };
+
+    const handlePurchase = () => {
+        if (onPurchase && athlete.id !== undefined) {
+            onPurchase(athlete.id);
+        } else {
+            console.warn("Cannot purchase athlete without a valid ID.");
+        }
+    };
 
     const buttonClasses = `
         bg-sky-600
@@ -48,8 +73,9 @@ const AthleteItem: FC<AthleteItemProps> = ({ athlete, onDelete, onEdit }) => {
             </div>
 
             <div className="m-2 flex justify-end gap-2">
-                <button className={buttonClasses} onClick={ () => { onEdit(athlete.id as number) } } >Edit</button>
-                <button className={buttonClasses} onClick={ () => { onDelete(athlete.id as number) } }>Delete</button>
+                {onDelete && <button className={buttonClasses} onClick={handleDelete}>Delete</button>}
+                {onEdit && <button className={buttonClasses} onClick={handleEdit}>Edit</button>}
+                {onPurchase && <button className={buttonClasses} onClick={handlePurchase}>Purchase</button>}
             </div>
 
         </article>
