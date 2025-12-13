@@ -4,12 +4,12 @@ import FinancialDashboardList from "../components/financials/FinancialDashboardL
 import { useEffect, useState } from "react";
 import { getAllAthletes, updateAthlete  } from "../services/athleteService";
 import {} from "../services/financeService";
-import AthleteList from "../components/AthleteList"
+import AthleteList from "../components/athletes/AthleteList";
 
 
 const FinancePage = () => {
     const [athletes, setAthletes] = useState<IAthlete[]>([]);
-    
+
     const sampleFinancials: IFinance = {
     moneyLeft: 120000000,
     moneySpent: 0,
@@ -29,15 +29,15 @@ const FinancePage = () => {
 
             await updateAthlete(updatedAthlete);
 
-            setAthletes(prevAthletes => 
-                prevAthletes.map(athlete => 
+            setAthletes(prevAthletes =>
+                prevAthletes.map(athlete =>
                     athlete.id === id ? updatedAthlete : athlete
                 )
             );
         } catch (error) {
             alert("Error updating athlete purchase status");
         }
-        
+
     };
 
     const fetchAthletes = async () => {
@@ -63,6 +63,6 @@ const FinancePage = () => {
             </div>
         </>
     )
-} 
+}
 
 export default FinancePage;

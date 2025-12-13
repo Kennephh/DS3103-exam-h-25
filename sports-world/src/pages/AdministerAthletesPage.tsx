@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react";
 import type { IAthlete } from "../interfaces/IAthlete";
-import AthleteList from "../components/AthleteList"
+import AthleteList from "../components/athletes/AthleteList";
 import { getAthleteByName, getAllAthletes, deleteAthlete } from "../services/athleteService";
 
 
