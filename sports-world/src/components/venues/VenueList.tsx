@@ -1,6 +1,6 @@
 import VenueItem from "./VenueItem";
 import useVenues from "../../hooks/useVenues";
-import SearchVenue from "./SearchVenue";
+import SearchVenue from "../SearchBar";
 
 const VenueList = () => {
 
