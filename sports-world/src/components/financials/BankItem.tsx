@@ -38,7 +38,7 @@ const BankItem = ({financials} : BankProps) => {
                     placeholder="Enter loan amount..." 
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
                 />
-                    <button className={buttonClasses}>Loan</button>
+                    <button className={buttonClasses}>Borrow</button>
                 </div>
     
             </article>
