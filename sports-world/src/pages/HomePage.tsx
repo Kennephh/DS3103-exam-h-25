@@ -6,7 +6,6 @@ import venue from "../assets/venue.webp"
 const HomePage = () => {
 
     const linkClassNames = `
-        p-4
         bg-black/60
         text-white
         rounded
@@ -19,7 +18,7 @@ const HomePage = () => {
         w-full h-full
         tracking-wider
         transition-all
-        hover:scale-115
+        hover:scale-125
     `;
 
     const linkDivClassNames = `
@@ -28,7 +27,7 @@ const HomePage = () => {
         flex-col
         rounded
         overflow-hidden
-        hover:scale-105
+        hover:scale-102
         transition-all
         hover:shadow-xl
     `;
@@ -50,7 +49,7 @@ const HomePage = () => {
     };
 
     return(
-        <div className="container mx-auto h-[calc(100vh-4rem)] flex flex-col gap-4 py-4">
+        <div className="container mx-auto h-[calc(100vh-4rem)] flex flex-col gap-2 p-2">
             <div className={linkDivClassNames} style={bgStyle1}>
                 <Link to="/athletes" className={linkClassNames}>Athletes</Link>
             </div>
