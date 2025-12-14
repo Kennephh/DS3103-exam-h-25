@@ -1,6 +1,6 @@
 import VenueItem from "./VenueItem";
 import useVenues from "../../hooks/useVenues";
-import SearchVenue from "../SearchBar";
+import SearchBar from "../SearchBar";
 
 const VenueList = () => {
 
@@ -18,19 +18,24 @@ const VenueList = () => {
         return venueJSX;
     }
 
+    const showVenues = () => {
+        if(isLoading){
+            return <p>Loading</p>
+        }
+        if(errorMessage){
+            return <p>{errorMessage}</p>
+        }
+        if(venues.length === 0){
+            return <p>Could not find venue with name: '{userSearch}'</p>
+        }
+        return getVenueJSX();
+    };
+
     return(
         <>
-            <SearchVenue onSearch={setUserSearch}/>
+            <SearchBar onSearch={setUserSearch} placeholder="Search venues..."/>
             <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-                {isLoading ? (
-                    <p>Loading...</p>
-                ) : errorMessage ? (
-                    <p>{errorMessage}</p>
-                ) : venues.length === 0 ? (
-                    <p>Could not find venues with the name: '{userSearch}'</p>
-                ) : ( getVenueJSX()
-                )
-                }
+                {showVenues()}
             </section>
         </>
     )

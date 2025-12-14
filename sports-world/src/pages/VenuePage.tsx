@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import VenueList from "../components/venues/VenueList";
+import VenuesList from "../components/venues/VenueList";
 
 const VenuesPage = () => {
     return (
@@ -12,8 +12,7 @@ const VenuesPage = () => {
                     Manage Venues
                     </Link>
                 </div>
-                <VenueList/>
-                
+                <VenuesList/>
             </div>
         </>
     )
