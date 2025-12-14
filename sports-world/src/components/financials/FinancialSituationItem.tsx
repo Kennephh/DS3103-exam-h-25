@@ -1,5 +1,6 @@
 import { type IFinance } from "../../interfaces/IFinance";
 import {type IAthlete} from "../../interfaces/IAthlete";
+import {} from "../../services/financeService";
 // Må hente inn financeService og populere db
 
 export interface IFinanceProps{
