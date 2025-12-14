@@ -66,7 +66,7 @@ public class AthletesController(ApplicationDbContext context) : ControllerBase
                     && athlete.Name.ToLower().Contains(name.ToLower())
                 ).ToListAsync();
 
-            if (athletes.Count == 0) return NotFound("No athletes found.");
+            if (athletes.Count == 0) return Ok(new List<Athlete>());
 
             return Ok(athletes);
         }
