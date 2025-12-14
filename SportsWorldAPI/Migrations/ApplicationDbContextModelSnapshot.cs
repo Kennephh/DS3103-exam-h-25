@@ -170,6 +170,15 @@ namespace SportsWorldAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Finances");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            MoneyLeft = 10000000,
+                            MoneySpent = 0,
+                            NumberOfPurchases = 0
+                        });
                 });
 
             modelBuilder.Entity("SportsWorldAPI.Models.Venue", b =>

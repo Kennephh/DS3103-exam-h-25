@@ -183,6 +183,16 @@ namespace SportsWorldAPI.Data
                     Image = "/images/venues/jeunesse-arena.jpg" 
                 }
             );
+            modelBuilder.Entity<Finance>().HasData(
+                new Finance 
+                { 
+                    Id = 1,
+                    MoneyLeft = 10000000,
+                    NumberOfPurchases = 0,
+                    MoneySpent = 0
+
+                }
+            );
         }
     }
 }
