@@ -58,21 +58,19 @@ export const AthleteProvider = ({ children }: {children: ReactNode}) => {
     };
 
     const removeAthlete = async (id: number) => {
-        const confirmDel = window.confirm("Are you sure you want to delete this athlete?");
-        if (confirmDel) {
-            startRequest();
+        startRequest();
 
-            try{
-                await deleteAthlete(id);
-                setAthletes(
-                    athletes.filter(athlete => athlete.id !== id)
-                );
-            } catch (error) {
-                setError("Error while deleting athlete.");
-            } finally {
-                setIsLoading(false);
-            }
-        };
+        try{
+            await deleteAthlete(id);
+            setAthletes(
+                athletes.filter(athlete => athlete.id !== id)
+            );
+        } catch (error) {
+            setError("Error while deleting athlete.");
+            throw error;
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const addAthlete = async (newAthlete: IAthlete) => {
@@ -83,7 +81,8 @@ export const AthleteProvider = ({ children }: {children: ReactNode}) => {
             setAthletes(prev => [...prev, createdAthlete]);
           };
         } catch (error) {
-            setError("Error while adding athlete.")
+            setError("Error while adding athlete.");
+            throw error;
         } finally {
             setIsLoading(false);
         }
@@ -95,7 +94,8 @@ export const AthleteProvider = ({ children }: {children: ReactNode}) => {
             await updateAthlete(athleteToUpdate);
             setAthletes(prev => prev.map(athlete => athlete.id === athleteToUpdate.id ? athleteToUpdate: athlete))
         } catch (error){
-            setError("Error while updating athlete.")
+            setError("Error while updating athlete.");
+            throw error;
         } finally {
             setIsLoading(false);
         }
