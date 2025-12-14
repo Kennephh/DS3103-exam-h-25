@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import {type IVenueResponse } from "../interfaces/ResponseInterfaces";
 import type { IVenue } from "../interfaces/IVenue";
 import VenueService from "../services/VenueService";
@@ -6,20 +6,24 @@ import { uploadImage } from "../services/athleteService";
 
 const useVenuesActions = () => {
 
-    const [venue, setVenue] = useState({
-        name: "",
-        capacity: 0,
-        image: ""
-    });
-
-    const venueNameInput = useRef<HTMLInputElement | null>(null);
-    const venueCapacityInput = useRef<HTMLInputElement | null>(null);
+    const venueNameInput = useState<HTMLInputElement | null>(null);
+    const venueCapacityInput = useState<HTMLInputElement | null>(null);
     const [image, setImage] = useState<File | null>(null);
 
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+    const [statusMessage, setStatusMessage] = useState<string | null>("");
 
-    const createVenue = async (newVenue: IVenue): Promise<IVenueResponse> => {
+
+    const addVenue = async (newVenue: IVenue): Promise<IVenueResponse> => {
+        setIsSubmitting(true);
+        setStatusMessage("");
         try {
-            const result = VenueService.createVenue(newVenue);
+            const result = await VenueService.createVenue(newVenue);
+            if(result.success){
+                setStatusMessage("Venue created successfully!");
+            } else {
+                setStatusMessage("Error creating venue, please try again.");
+            }
             return result;
         } catch (error) {
             console.error("Error creating venue, please try again later.", error)
@@ -28,9 +32,17 @@ const useVenuesActions = () => {
                 data: null
             };
         }
+        finally{
+            setIsSubmitting(false);
+        }
+    };
 
-
-    }
+    const editVenue = async (updatedVenue: IVenue): Promise<IVenueResponse> => {
+        const result = await VenueService.updateVenue(updatedVenue);
+        if(result.success){
+            setStatusMessage("");
+        }
+    };
 
 
 
