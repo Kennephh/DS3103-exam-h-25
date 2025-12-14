@@ -10,7 +10,6 @@ const useVenues = () => {
     const [userSearch, setUserSearch] = useState<string>("");
     
     /* 
-        
         Henter alle venues fra VenueService og lagrer det til result
         Sjekker om result.success er true OG om det er en array som kommer inn
         Stemmer disse betingelsene, så blir staten til venues satt, med result.data
