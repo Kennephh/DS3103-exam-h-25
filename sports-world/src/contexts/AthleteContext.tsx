@@ -78,7 +78,10 @@ export const AthleteProvider = ({ children }: {children: ReactNode}) => {
         try {
           const createdAthlete = await createAthlete(newAthlete);
           if (createdAthlete) {
-            setAthletes(prev => [...prev, createdAthlete]);
+            setAthletes(prev => {
+                const newList = [...prev, createdAthlete];
+                return newList.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+            });
           };
         } catch (error) {
             setError("Error while adding athlete.");
@@ -92,7 +95,10 @@ export const AthleteProvider = ({ children }: {children: ReactNode}) => {
         startRequest();
         try {
             await updateAthlete(athleteToUpdate);
-            setAthletes(prev => prev.map(athlete => athlete.id === athleteToUpdate.id ? athleteToUpdate: athlete))
+            setAthletes(prev => {
+                const newList = prev.map(athlete => athlete.id === athleteToUpdate.id ? athleteToUpdate: athlete);
+                return newList.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+            })
         } catch (error){
             setError("Error while updating athlete.");
             throw error;
