@@ -1,52 +1,20 @@
 import { Link, useNavigate } from "react-router-dom"
-import { useEffect, useState } from "react";
-import type { IAthlete } from "../interfaces/IAthlete";
 import AthleteList from "../components/athletes/AthleteList";
-import { getAthleteByName, getAllAthletes, deleteAthlete } from "../services/athleteService";
+import { useAthleteContext } from "../contexts/AthleteContext";
+import SearchBar from "../components/SearchBar";
 
 
 const AdministerAthletesPage = () => {
 
-    const [athletes, setAthletes] = useState<IAthlete[]>([]);
-
-    const fetchAthletes = async (searchQuery: string = "") => {
-        let data;
-        if (searchQuery){
-            data = await getAthleteByName(searchQuery);
-        } else {
-            data = await getAllAthletes();
-        }
-
-        if (data) {
-            const sortedData = data.sort((a, b) => a.name.localeCompare(b.name));
-            setAthletes(sortedData);
-        };
-    };
-
     const navigate = useNavigate();
 
-    const handleEdit = async (id: number) => {
+    const { athletes, getAthletes, removeAthlete, error } = useAthleteContext();
+
+    const handleEdit = (id: number) => {
         navigate(`/edit-athlete/${id}`);
     };
 
-    useEffect(() => {
-        fetchAthletes();
-    }, []);
-
-    const handleSearch = async (event: React.ChangeEvent<HTMLInputElement>) => {
-        fetchAthletes(event.target.value);
-
-    };
-
-    const handleDelete = async (id: number) => {
-        const confirmDel = window.confirm("Are you sure you want to delete this athlete?");
-        if (confirmDel) {
-            await deleteAthlete(id);
-            setAthletes(
-                athletes.filter(athlete => athlete.id !== id)
-            );
-        };
-    };
+    if (error) return <p className="text-red-500">{error}</p>
 
     return(
         <div className="container mx-auto h-[calc(100vh-4rem)] flex flex-col gap-4 p-4">
@@ -57,16 +25,16 @@ const AdministerAthletesPage = () => {
                 </Link>
             </div>
 
-            <div className="flex gap-2">
-                <input
-                    type="text"
-                    placeholder="Search by name.."
-                    className="border p-2 rounded w-full"
-                    onChange={handleSearch}
-                />
-            </div>
+            <SearchBar
+                onSearch={getAthletes}
+                placeholder="Search by name"
+            />
 
-            <AthleteList athletes={athletes} onDelete={handleDelete} onEdit={handleEdit}/>
+            <AthleteList
+                athletes={athletes}
+                onDelete={removeAthlete}
+                onEdit={handleEdit}
+            />
         </div>
     )
 }

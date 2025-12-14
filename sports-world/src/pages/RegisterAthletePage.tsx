@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getAthleteById, uploadImage, createAthlete, updateAthlete } from "../services/athleteService";
+import { getAthleteById, uploadImage } from "../services/athleteService";
+import { useAthleteContext } from "../contexts/AthleteContext";
 
 const RegisterAthletePage = () => {
 
     const { id } = useParams();
+    const navigate = useNavigate();
+
+    const { addAthlete, editAthlete, isLoading} = useAthleteContext();
 
     const [athlete, setAthlete] = useState({
         name: "",
@@ -50,8 +54,6 @@ const RegisterAthletePage = () => {
         };
     };
 
-    const navigate = useNavigate();
-
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         let imagePath = athlete.image;
@@ -71,9 +73,9 @@ const RegisterAthletePage = () => {
         const athleteToSave = { ...athlete, image: imagePath};
         try{
             if (id) {
-                await updateAthlete({ ...athleteToSave, id: parseInt(id)});
+                await editAthlete({ ...athleteToSave, id: parseInt(id)});
             } else {
-                await createAthlete(athleteToSave);
+                await addAthlete(athleteToSave);
             };
             navigate("/athletes");
         } catch(error){
@@ -87,7 +89,7 @@ const RegisterAthletePage = () => {
             <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-md">
                 <label>
                     Name:
-                    <input type="text" value={athlete.name} onChange={handleNameChange} className="border p-2 w-full" />
+                    <input type="text" required={true} value={athlete.name} onChange={handleNameChange} className="border p-2 w-full" />
                 </label>
 
                 <label>
@@ -115,7 +117,10 @@ const RegisterAthletePage = () => {
                     <input type="file" onChange={handleImageChange} className="border p-2 w-full" />
                 </label>
 
-                <button type={"submit"} className="bg-sky-600 text-white p-2 rounded hover:bg-sky-700" >Lagre</button>
+                <button
+                    type={"submit"}
+                    disabled={isLoading}
+                    className={`bg-sky-600 text-white p-2 rounded ${isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-sky-700'}`} >{isLoading ? "Saving..." : "Lagre"}</button>
             </form>
 
         </div>
