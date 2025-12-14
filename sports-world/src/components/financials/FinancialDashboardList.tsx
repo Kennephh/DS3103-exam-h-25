@@ -12,6 +12,7 @@ interface FinancialDashboardListProps{
 const FinancialDashboardList : FC<FinancialDashboardListProps> = ({financials, athletes}) => {
 
     return(
+        // DETTE SER KNOTETE UT PÅ TELEFON
         <section className="flex space-x-4">
             <div className="flex-1">
                 <FinancialSituationItem financials={financials} athletes={athletes} />
