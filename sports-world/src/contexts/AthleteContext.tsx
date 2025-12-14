@@ -58,21 +58,19 @@ export const AthleteProvider = ({ children }: {children: ReactNode}) => {
     };
 
     const removeAthlete = async (id: number) => {
-        const confirmDel = window.confirm("Are you sure you want to delete this athlete?");
-        if (confirmDel) {
-            startRequest();
+        startRequest();
 
-            try{
-                await deleteAthlete(id);
-                setAthletes(
-                    athletes.filter(athlete => athlete.id !== id)
-                );
-            } catch (error) {
-                setError("Error while deleting athlete.");
-            } finally {
-                setIsLoading(false);
-            }
-        };
+        try{
+            await deleteAthlete(id);
+            setAthletes(
+                athletes.filter(athlete => athlete.id !== id)
+            );
+        } catch (error) {
+            setError("Error while deleting athlete.");
+            throw error;
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const addAthlete = async (newAthlete: IAthlete) => {
@@ -80,10 +78,14 @@ export const AthleteProvider = ({ children }: {children: ReactNode}) => {
         try {
           const createdAthlete = await createAthlete(newAthlete);
           if (createdAthlete) {
-            setAthletes(prev => [...prev, createdAthlete]);
+            setAthletes(prev => {
+                const newList = [...prev, createdAthlete];
+                return newList.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+            });
           };
         } catch (error) {
-            setError("Error while adding athlete.")
+            setError("Error while adding athlete.");
+            throw error;
         } finally {
             setIsLoading(false);
         }
@@ -93,9 +95,13 @@ export const AthleteProvider = ({ children }: {children: ReactNode}) => {
         startRequest();
         try {
             await updateAthlete(athleteToUpdate);
-            setAthletes(prev => prev.map(athlete => athlete.id === athleteToUpdate.id ? athleteToUpdate: athlete))
+            setAthletes(prev => {
+                const newList = prev.map(athlete => athlete.id === athleteToUpdate.id ? athleteToUpdate: athlete);
+                return newList.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+            })
         } catch (error){
-            setError("Error while updating athlete.")
+            setError("Error while updating athlete.");
+            throw error;
         } finally {
             setIsLoading(false);
         }

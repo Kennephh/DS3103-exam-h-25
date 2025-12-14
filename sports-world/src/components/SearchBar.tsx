@@ -6,16 +6,16 @@ export interface ISearchBarProps{
 
 const SearchBar = ({onSearch, placeholder}: ISearchBarProps) => {
     return (
-        <div className="mb-4">
-                <input type="text"
-                    placeholder={placeholder || "Search..."}
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
-                    onChange={(e) => onSearch(e.target.value)}
-                />
-            </div>
+        <div>
+            <input
+                type="text"
+                placeholder={placeholder || "Search..."}
+                aria-label={placeholder || "Search"}
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
+                onChange={(e) => onSearch(e.target.value)}
+            />
+        </div>
     )
-
-
 }
 
 export default SearchBar;

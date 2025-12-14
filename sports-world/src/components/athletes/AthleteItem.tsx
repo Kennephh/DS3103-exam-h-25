@@ -1,6 +1,7 @@
 import type { IAthlete } from "../../interfaces/IAthlete";
 import type { FC } from "react";
 import { API_BASE_URL } from "../../config";
+import Button from "../Button";
 
 interface AthleteItemProps {
     athlete: IAthlete;
@@ -35,18 +36,10 @@ const AthleteItem: FC<AthleteItemProps> = ({ athlete, onDelete, onEdit, onPurcha
         }
     };
 
-    const buttonClasses = `
-        bg-sky-600
-        text-white
-        px-3
-        py-1
-        rounded
-        hover:bg-sky-700
-        hover:cursor-pointer
-    `;
 
     return (
         <article className="
+            p-2
             h-full
             w-full
             bg-white
@@ -62,11 +55,12 @@ const AthleteItem: FC<AthleteItemProps> = ({ athlete, onDelete, onEdit, onPurcha
                 aspect-3/4
                 object-cover
                 rounded-t
+                border
                 " />
             )}
 
-            <div className="px-2 flex flex-col">
-                <h3 className="text-lg font-semibold mb-2">{athlete.name}</h3>
+            <div className="pt-2 flex flex-col">
+                <h3 className="text-xl font-semibold mb-2">{athlete.name}</h3>
                 <p className=""><span className="font-semibold">Gender:</span> {athlete.gender}</p>
                 <p className=""><span className="font-semibold">Price:</span> {"$" + athlete.price + " (USD)"}</p>
                 <p className="">
@@ -76,9 +70,23 @@ const AthleteItem: FC<AthleteItemProps> = ({ athlete, onDelete, onEdit, onPurcha
             </div>
 
             <div className="m-2 flex justify-end gap-2">
-                {onDelete && <button className={buttonClasses} onClick={handleDelete}>Delete</button>}
-                {onEdit && <button className={buttonClasses} onClick={handleEdit}>Edit</button>}
-                {onPurchase && <button className={buttonClasses} onClick={handlePurchase}>Purchase</button>}
+                {onDelete && (
+                    <Button variant="danger" onClick={handleDelete}>
+                        Delete
+                    </Button>
+                )}
+
+                {onEdit && (
+                    <Button variant="primary" onClick={handleEdit}>
+                        Edit
+                    </Button>
+                )}
+
+                {onPurchase && (
+                    <Button variant="success" onClick={handlePurchase}>
+                        Purchase
+                    </Button>
+                )}
             </div>
 
         </article>
