@@ -3,7 +3,7 @@ import { type IVenue, } from "../interfaces/IVenue";
 import {type IVenueResponse } from "../interfaces/ResponseInterfaces";
 import { API_PATHS } from "../config";
 
-const endpoint = API_PATHS.VENUES
+const endpoint = API_PATHS.VENUES;
 
 const getAllVenues = async () : Promise<IVenueResponse> => {
     try {

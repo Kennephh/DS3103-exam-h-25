@@ -40,7 +40,7 @@ const useVenues = () => {
                 return venue.name.toLowerCase().includes(userSearch.toLowerCase());
             }
             return false;
-        })
+        });
 
     return {
         venues: filteredVenues,
