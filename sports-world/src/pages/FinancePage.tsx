@@ -3,7 +3,7 @@ import {type IFinance } from "../interfaces/IFinance";
 import FinancialDashboardList from "../components/financials/FinancialDashboardList";
 import { useEffect, useState } from "react";
 import { getAllAthletes, updateAthlete  } from "../services/athleteService";
-import {} from "../services/financeService";
+import {} from "../services/financeService"; // få inn loan og 
 import AthleteList from "../components/AthleteList"
 
 
