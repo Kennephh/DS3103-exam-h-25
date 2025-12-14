@@ -1,13 +1,14 @@
 
-export interface IVenueSearchProps{
+export interface ISearchBarProps{
     onSearch: (search: string) => void;
+    placeholder?: string
 }
 
-const SearchVenue = ({onSearch}: IVenueSearchProps) => {
+const SearchBar = ({onSearch, placeholder}: ISearchBarProps) => {
     return (
         <div className="mb-4">
                 <input type="text"
-                    placeholder="Search venues.." 
+                    placeholder={placeholder || "Search..."}
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
                     onChange={(e) => onSearch(e.target.value)}
                 />
@@ -17,4 +18,4 @@ const SearchVenue = ({onSearch}: IVenueSearchProps) => {
 
 }
 
-export default SearchVenue;
+export default SearchBar;
