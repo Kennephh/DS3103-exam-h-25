@@ -32,7 +32,7 @@ const FinancePageContent = () => {
         getAthletes();
     }, [getAthletes]);
 
-    const notPurchasedAthletes = athletes.filter(athlete => !athlete.purchaseStatus);
+    const notPurchasedAthletes = athletes.filter(athlete => athlete.purchaseStatus == false);
 
     return (
         <div className="container mx-auto h-[calc(100vh-4rem)] flex flex-col gap-4 p-4">

@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useContext } from "react";
+import { createContext, useState, useEffect, useContext, useCallback } from "react";
 import type { ReactNode } from "react";
 import type { IAthlete } from "../interfaces/IAthlete";
 import { getAllAthletes, getAthleteByName, deleteAthlete, createAthlete, updateAthlete  } from "../services/athleteService";
@@ -35,7 +35,7 @@ export const AthleteProvider = ({ children }: {children: ReactNode}) => {
         setError(null);
     }
 
-    const getAthletes = async (searchQuery: string = "") => {
+    const getAthletes = useCallback(async(searchQuery: string = "") => {
         startRequest();
         let data;
 
@@ -55,7 +55,7 @@ export const AthleteProvider = ({ children }: {children: ReactNode}) => {
         } finally {
             setIsLoading(false);
         }
-    };
+    }, []); // Empty array means this function never changes
 
     const removeAthlete = async (id: number) => {
         const confirmDel = window.confirm("Are you sure you want to delete this athlete?");
