@@ -36,4 +36,4 @@ const putFinance = async (newFinance : IFinance) : Promise<IFinance | undefined>
     }
 }
 
-export default {getFinance, postFinance, putFinance}
+export {getFinance, postFinance, putFinance}

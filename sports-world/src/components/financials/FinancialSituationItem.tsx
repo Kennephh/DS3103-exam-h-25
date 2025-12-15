@@ -1,21 +1,13 @@
-import { type IFinance } from "../../interfaces/IFinance";
-import {type IAthlete} from "../../interfaces/IAthlete";
-import {} from "../../services/financeService";
-// Må hente inn financeService og populere db
+import {useFinanceContext} from "../../contexts/FinanceContext";
+import { useAthleteContext } from "../../contexts/AthleteContext";
 
-export interface IFinanceProps{
-    financials : IFinance // valgte å kalle det for financials da det skal representere flere økonomiske verdier
-    athletes : IAthlete[]
-}
+const FinancialSituationItem = () => {
+    const {financials} = useFinanceContext();
+    const {athletes} = useAthleteContext();
 
-const FinancialSituationItem = ({financials, athletes} : IFinanceProps) => {
+    const notPurchasedAthletes = athletes.filter(athlete => athlete.purchaseStatus);
 
-    const countPurchasedAthletes = () => {
-        return athletes.reduce((count, athlete) => {
-            return count + (athlete.purchaseStatus ? 1 : 0);
-        }, 0);
-    }; // Summerer antall atleter som har purchaseStatus true
-
+    if(financials){
     return(
         <article className="
             h-full
@@ -30,10 +22,11 @@ const FinancialSituationItem = ({financials, athletes} : IFinanceProps) => {
                 <h3 className="text-lg font-semibold mb-2">Financial overview</h3>
                 <p>Balance: {financials.moneyLeft}</p>
                 <p>Expenditure: {financials.moneySpent}</p>
-                <p>Athletes purchased: {countPurchasedAthletes()}</p>
+                <p>Athletes purchased: {notPurchasedAthletes.length}</p>
             </div>
         </article>
     );
+    };
 }
 
 export default FinancialSituationItem;

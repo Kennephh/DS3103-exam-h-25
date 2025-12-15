@@ -10,8 +10,8 @@ using SportsWorldAPI.Data;
 namespace SportsWorldAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251208120300_SyncDatabase")]
-    partial class SyncDatabase
+    [Migration("20251214211700_CompleteReset")]
+    partial class CompleteReset
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -173,6 +173,15 @@ namespace SportsWorldAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Finances");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            MoneyLeft = 10000000,
+                            MoneySpent = 0,
+                            NumberOfPurchases = 0
+                        });
                 });
 
             modelBuilder.Entity("SportsWorldAPI.Models.Venue", b =>

@@ -8,11 +8,13 @@ import VenuePage from './pages/VenuePage'
 import RegisterVenuePage from './pages/RegisterVenuePage'
 import FinancePage from './pages/FinancePage'
 import { AthleteProvider } from './contexts/AthleteContext'
+import { FinanceProvider } from './contexts/FinanceContext';
 
 function App() {
 
   return (
     <AthleteProvider>
+      <FinanceProvider>
       <Routes>
         <Route path="/" element={<AppLayout />}>
           <Route index element={<HomePage />} />
@@ -24,11 +26,14 @@ function App() {
           <Route path="venues" element={<VenuePage />} />
           <Route path="register-venue" element={<RegisterVenuePage />} />
 
+          
           <Route path='finance' element={<FinancePage/>} />
+          
 
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
+      </FinanceProvider>
     </AthleteProvider>
   );
 }
