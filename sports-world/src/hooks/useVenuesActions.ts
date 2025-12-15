@@ -6,42 +6,52 @@ import { uploadImage } from "../services/athleteService";
 
 const useVenuesActions = () => {
 
-    const venueNameInput = useState<HTMLInputElement | null>(null);
-    const venueCapacityInput = useState<HTMLInputElement | null>(null);
-    const [image, setImage] = useState<File | null>(null);
-
-    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-    const [statusMessage, setStatusMessage] = useState<string | null>("");
+    const [status, setStatus] = useState({
+        message: "",
+        type: "",
+        isSubmitting: false
+    });
 
 
     const addVenue = async (newVenue: IVenue): Promise<IVenueResponse> => {
-        setIsSubmitting(true);
-        setStatusMessage("");
-        try {
+        setStatus({
+            message: "",
+            type: "",
+            isSubmitting: true
+        });
             const result = await VenueService.createVenue(newVenue);
             if(result.success){
-                setStatusMessage("Venue created successfully!");
+                setStatus({
+                    message: "Venue successfully created!",
+                    type: "Success",
+                    isSubmitting: false
+                });
             } else {
-                setStatusMessage("Error creating venue, please try again.");
+                setStatus({
+                    message: "Error creating venue, please try again later.",
+                    type: "Error",
+                    isSubmitting: false
+                });
             }
             return result;
-        } catch (error) {
-            console.error("Error creating venue, please try again later.", error)
-            return {
-                success: false,
-                data: null
-            };
-        }
-        finally{
-            setIsSubmitting(false);
-        }
     };
 
     const editVenue = async (updatedVenue: IVenue): Promise<IVenueResponse> => {
         const result = await VenueService.updateVenue(updatedVenue);
         if(result.success){
-            setStatusMessage("");
+            setStatus({
+                message: "Venue successfully updated!",
+                type: "Success",
+                isSubmitting: false
+            });
+        } else {
+            setStatus({
+                message: "Error updating venue, please try again later.",
+                type: "Error",
+                isSubmitting: false
+            });
         }
+        return result;
     };
 
 
