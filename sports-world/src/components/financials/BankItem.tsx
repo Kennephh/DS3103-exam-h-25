@@ -44,8 +44,7 @@ const BankItem = () => {
             overflow-hidden
         ">
             <div className="px-2 flex flex-col">
-                <h3 className="text-lg font-semibold mb-2">SportBank</h3> 
-                 
+                <h3 className="text-lg font-semibold mb-2">SportBank</h3>      
             </div>
             
             <div className="m-2 flex justify-end gap-2">

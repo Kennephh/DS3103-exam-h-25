@@ -2,6 +2,7 @@ import { createContext, useState, useEffect, useContext, type ReactNode } from "
 import type { IFinance } from "../interfaces/IFinance";
 import type { IFinanceContext } from "../interfaces/IFinanceContext";
 import { getFinance, postFinance, putFinance } from "../services/financeService";
+import { useAthleteContext } from "../contexts/AthleteContext";
 
 const FinanceContext = createContext<IFinanceContext | null>(null);
 
@@ -15,6 +16,7 @@ export const useFinanceContext = () => {
 
 export const FinanceProvider = ({ children }: { children: ReactNode }) => {
     const [financials, setFinancials] = useState<IFinance | null>(null);
+     const {athletes} = useAthleteContext();
 
     const fetchFinancials = async () => {
         try {
@@ -44,12 +46,18 @@ export const FinanceProvider = ({ children }: { children: ReactNode }) => {
     };
 
     const updateFinance = async (amount: number) => {
+        const purchasedAthletes = athletes.filter(athlete => athlete.purchaseStatus === true).length;
+
+        console.log('Total athletes:', athletes.length);
+        console.log('Purchased athletes:', purchasedAthletes);
+        console.log('Current financials.numberOfPurchases:', financials?.numberOfPurchases);
+
         if (!financials) return;
 
         const updatedFinanceObject: IFinance = {
             ...financials,
             moneyLeft: financials.moneyLeft - amount,
-            numberOfPurchases: financials.numberOfPurchases + 1, // Dette bør endres da den bør hente antall som har status purchased/!purchased
+            numberOfPurchases: purchasedAthletes,
             moneySpent: financials.moneySpent + amount,
         };
 
@@ -63,6 +71,7 @@ export const FinanceProvider = ({ children }: { children: ReactNode }) => {
 
     useEffect(() => {
         fetchFinancials();
+        athletes;
     }, []);
 
     return (
