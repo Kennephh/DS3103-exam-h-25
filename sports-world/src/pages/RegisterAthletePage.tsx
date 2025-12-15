@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getAthleteById, uploadImage } from "../services/athleteService";
 import { useAthleteContext } from "../contexts/AthleteContext";
+import { useFinanceContext } from "../contexts/FinanceContext";
+import { putFinance } from "../services/financeService";
 
 const RegisterAthletePage = () => {
 
@@ -9,6 +11,7 @@ const RegisterAthletePage = () => {
     const navigate = useNavigate();
 
     const { addAthlete, editAthlete, isLoading} = useAthleteContext();
+    const { updateFinance } = useFinanceContext();
 
     const [athlete, setAthlete] = useState({
         name: "",
@@ -78,6 +81,8 @@ const RegisterAthletePage = () => {
             } else {
                 await addAthlete(athleteToSave);
             };
+            updateFinance: (amount: number) => Promise<void>;
+
             navigate("/athletes");
         } catch(error){
             alert("Feil ved lagring av atlet");

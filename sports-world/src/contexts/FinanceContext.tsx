@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect, useContext, type ReactNode } from "react";
 import type { IFinance } from "../interfaces/IFinance";
 import type { IFinanceContext } from "../interfaces/IFinanceContext";
-import { getFinance, postFinance, putFinance } from "../services/financeService";
+import { getFinance, putFinance } from "../services/financeService";
 import { useAthleteContext } from "../contexts/AthleteContext";
 
 const FinanceContext = createContext<IFinanceContext | null>(null);
@@ -38,7 +38,7 @@ export const FinanceProvider = ({ children }: { children: ReactNode }) => {
         };
 
         try {
-            const updated = await postFinance(newFinanceObject);
+            const updated = await putFinance(newFinanceObject);
             if (updated) setFinancials(updated);
         } catch (error) {
             console.error("Failed to requestLoan:", error);
@@ -69,29 +69,6 @@ export const FinanceProvider = ({ children }: { children: ReactNode }) => {
         fetchFinancials();
     }, []);
 
-    useEffect(() => {
-    if (financials) {
-        const purchasedAthletes = athletes.filter(athlete => athlete.purchaseStatus === true).length;
-        const totalSpent = athletes.reduce((sum, athlete) => {
-            return athlete.purchaseStatus ? sum + athlete.price : sum;
-        }, 0);
-
-        const newFinancials = {
-            ...financials,
-            numberOfPurchases: purchasedAthletes,
-            moneySpent: totalSpent,
-            moneyLeft: financials.moneyLeft - totalSpent,
-        };
-
-        if ( // Ensure it does not set if the values are unchanged
-            newFinancials.numberOfPurchases !== financials.numberOfPurchases ||
-            newFinancials.moneySpent !== financials.moneySpent ||
-            newFinancials.moneyLeft !== financials.moneyLeft
-        ) {
-            setFinancials(newFinancials);
-        }
-    }
-}, [athletes]);
 
     return (
         <FinanceContext.Provider value={{

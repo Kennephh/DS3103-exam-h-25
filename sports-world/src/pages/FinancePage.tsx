@@ -30,7 +30,7 @@ const FinancePageContent = () => {
 
     useEffect(() => {
         getAthletes();
-    }, [getAthletes]);
+    }, []);
 
     const notPurchasedAthletes = athletes.filter(athlete => athlete.purchaseStatus == false);
 
