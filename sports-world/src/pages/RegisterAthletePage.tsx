@@ -44,6 +44,7 @@ const RegisterAthletePage = () => {
 
     const handlePurchaseStatusChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setAthlete({ ...athlete, purchaseStatus: event.target.checked});
+        console.log(athlete.purchaseStatus, "handlePurchaseStatusChange")
     };
 
     const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {

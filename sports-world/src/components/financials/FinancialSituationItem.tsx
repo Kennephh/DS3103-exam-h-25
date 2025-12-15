@@ -1,11 +1,7 @@
 import {useFinanceContext} from "../../contexts/FinanceContext";
-import { useAthleteContext } from "../../contexts/AthleteContext";
 
 const FinancialSituationItem = () => {
     const {financials} = useFinanceContext();
-    const {athletes} = useAthleteContext();
-
-    const notPurchasedAthletes = athletes.filter(athlete => athlete.purchaseStatus);
 
     if(financials){
     return(
@@ -22,7 +18,7 @@ const FinancialSituationItem = () => {
                 <h3 className="text-lg font-semibold mb-2">Financial overview</h3>
                 <p>Balance: {financials.moneyLeft}</p>
                 <p>Expenditure: {financials.moneySpent}</p>
-                <p>Athletes purchased: {notPurchasedAthletes.length}</p>
+                <p>Athletes purchased: {financials.numberOfPurchases}</p>
             </div>
         </article>
     );

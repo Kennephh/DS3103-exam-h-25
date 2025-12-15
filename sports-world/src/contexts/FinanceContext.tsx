@@ -48,10 +48,6 @@ export const FinanceProvider = ({ children }: { children: ReactNode }) => {
     const updateFinance = async (amount: number) => {
         const purchasedAthletes = athletes.filter(athlete => athlete.purchaseStatus === true).length;
 
-        console.log('Total athletes:', athletes.length);
-        console.log('Purchased athletes:', purchasedAthletes);
-        console.log('Current financials.numberOfPurchases:', financials?.numberOfPurchases);
-
         if (!financials) return;
 
         const updatedFinanceObject: IFinance = {
@@ -71,8 +67,31 @@ export const FinanceProvider = ({ children }: { children: ReactNode }) => {
 
     useEffect(() => {
         fetchFinancials();
-        athletes;
     }, []);
+
+    useEffect(() => {
+    if (financials) {
+        const purchasedAthletes = athletes.filter(athlete => athlete.purchaseStatus === true).length;
+        const totalSpent = athletes.reduce((sum, athlete) => {
+            return athlete.purchaseStatus ? sum + athlete.price : sum;
+        }, 0);
+
+        const newFinancials = {
+            ...financials,
+            numberOfPurchases: purchasedAthletes,
+            moneySpent: totalSpent,
+            moneyLeft: financials.moneyLeft - totalSpent,
+        };
+
+        if ( // Ensure it does not set if the values are unchanged
+            newFinancials.numberOfPurchases !== financials.numberOfPurchases ||
+            newFinancials.moneySpent !== financials.moneySpent ||
+            newFinancials.moneyLeft !== financials.moneyLeft
+        ) {
+            setFinancials(newFinancials);
+        }
+    }
+}, [athletes]);
 
     return (
         <FinanceContext.Provider value={{

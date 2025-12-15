@@ -35,7 +35,7 @@ export const AthleteProvider = ({ children }: {children: ReactNode}) => {
         setError(null);
     }
 
-    const getAthletes = useCallback(async(searchQuery: string = "") => {
+    const getAthletes = useCallback(async(searchQuery: string = "") => { // Added usecallback so it would not loop infinite (used)
         startRequest();
         let data;
 
@@ -55,7 +55,7 @@ export const AthleteProvider = ({ children }: {children: ReactNode}) => {
         } finally {
             setIsLoading(false);
         }
-    }, []); // Empty array means this function never changes
+    }, []);
 
     const removeAthlete = async (id: number) => {
         const confirmDel = window.confirm("Are you sure you want to delete this athlete?");
