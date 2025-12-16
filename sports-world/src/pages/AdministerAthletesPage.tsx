@@ -55,7 +55,7 @@ const AdministerAthletesPage = () => {
 
             <SearchBar
                 onSearch={getAthletes}
-                placeholder="Search by name"
+                placeholder="Search..."
             />
 
             <AthleteList

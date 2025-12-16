@@ -69,21 +69,21 @@ const AthleteItem: FC<AthleteItemProps> = ({ athlete, onDelete, onEdit, onPurcha
                 </p>
             </div>
 
-            <div className="m-2 flex justify-end gap-2">
+            <div className="my-2 flex justify-center gap-2">
                 {onDelete && (
-                    <Button variant="danger" onClick={handleDelete}>
+                    <Button className="flex-1" variant="danger" onClick={handleDelete}>
                         Delete
                     </Button>
                 )}
 
                 {onEdit && (
-                    <Button variant="primary" onClick={handleEdit}>
+                    <Button className="flex-1" variant="primary" onClick={handleEdit}>
                         Edit
                     </Button>
                 )}
 
                 {onPurchase && (
-                    <Button variant="success" onClick={handlePurchase}>
+                    <Button className="flex-1" variant="success" onClick={handlePurchase}>
                         Purchase
                     </Button>
                 )}
