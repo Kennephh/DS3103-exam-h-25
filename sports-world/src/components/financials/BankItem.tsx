@@ -1,21 +1,10 @@
 import { useState } from "react";
 import { useFinanceContext } from "../../contexts/FinanceContext";
+import Button from "../Button";
 
 const BankItem = () => {
     const { financials, requestLoan } = useFinanceContext();
     const [loanAmount, setLoanAmount] = useState("");
-
-    const buttonClasses = `
-        bg-sky-600
-        text-white
-        px-3
-        py-1
-        rounded
-        hover:bg-sky-700
-        hover:cursor-pointer
-        disabled:bg-gray-400
-        disabled:cursor-not-allowed
-    `;
 
     const handleBorrow = () => {
         const amount = parseInt(loanAmount);
@@ -37,11 +26,11 @@ const BankItem = () => {
         <article className="
             h-full
             w-full
+            p-4
             bg-white
             rounded
             shadow-xl
             transition-all
-            overflow-hidden
         ">
             <div className="px-2 flex flex-col">
                 <h3 className="text-lg font-semibold mb-2">SportBank</h3>      
@@ -56,7 +45,8 @@ const BankItem = () => {
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
                     min="0"
                 />
-                <button className={buttonClasses} onClick={handleBorrow}>Borrow</button>
+                <Button variant="primary" onClick={handleBorrow}>Borrow</Button>
+            
             </div>
         </article>
     );
