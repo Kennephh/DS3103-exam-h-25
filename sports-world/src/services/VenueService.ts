@@ -101,4 +101,26 @@ const deleteVenue = async (id: number) => {
     }
 }
 
-export default { getAllVenues, getVenueById, getVenueByName, createVenue, updateVenue, deleteVenue }
+const uploadImage = async (image: File): Promise<IVenueResponse> => {
+    try {
+        const formData = new FormData();
+        formData.append("img", image);
+        const response = await axios.post(API_PATHS.IMAGES, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+        }
+    });
+        return {
+            success: true,
+            data: response.data
+        };
+    } catch (error) {
+        console.error("Error uploading image", error);
+        return {
+            success: false,
+            data: null
+        };
+    }
+}
+
+export default { getAllVenues, getVenueById, getVenueByName, createVenue, updateVenue, deleteVenue, uploadImage }
