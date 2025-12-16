@@ -40,16 +40,17 @@ export const AthleteProvider = ({ children }: {children: ReactNode}) => {
         let data;
 
         try{
-                    if (searchQuery){
-            data = await getAthleteByName(searchQuery);
-        } else {
-            data = await getAllAthletes();
-        }
+            if (searchQuery){
+                data = await getAthleteByName(searchQuery);
+            } else {
+                data = await getAllAthletes();
+            }
 
-        if (data) {
-           const sortedData = data.sort((a, b) => (a.name || "").localeCompare(b.name || ""))
-            setAthletes(sortedData);
-        };
+            if (data) {
+                const sortedData = data.sort((a, b) => (a.name || "").localeCompare(b.name || ""))
+                setAthletes(sortedData);
+            };
+
         } catch (error) {
             setError("Error while getting athletes.")
         } finally {

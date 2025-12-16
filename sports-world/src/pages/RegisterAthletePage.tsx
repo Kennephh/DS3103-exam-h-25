@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { getAthleteById, uploadImage } from "../services/athleteService";
 import { useAthleteContext } from "../contexts/AthleteContext";
 import Button from "../components/Button";
+import { useFinanceContext } from "../contexts/FinanceContext";
 
 const RegisterAthletePage = () => {
 
@@ -10,6 +11,8 @@ const RegisterAthletePage = () => {
     const navigate = useNavigate();
 
     const { addAthlete, editAthlete, isLoading} = useAthleteContext();
+
+    const { fetchFinancials } = useFinanceContext();
 
     const [athlete, setAthlete] = useState({
         name: "",
@@ -75,6 +78,7 @@ const RegisterAthletePage = () => {
         try{
             if (id) {
                 await editAthlete({ ...athleteToSave, id: parseInt(id)});
+                await fetchFinancials();
             } else {
                 await addAthlete(athleteToSave);
             };

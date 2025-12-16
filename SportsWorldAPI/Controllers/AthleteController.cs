@@ -98,11 +98,32 @@ public class AthletesController(ApplicationDbContext context) : ControllerBase
     {
 
         var existingAthlete = await context.Athletes.FindAsync(id);
-
         if (existingAthlete == null) return NotFound();
 
         try
         {
+
+            bool statusHasChanged = existingAthlete.PurchaseStatus != athlete.PurchaseStatus;
+
+            if (statusHasChanged)
+            {
+                var finance = await context.Finances.FirstOrDefaultAsync();
+                if (finance != null)
+                {
+                    if (athlete.PurchaseStatus)
+                    {
+                        finance.NumberOfPurchases++;
+                        finance.MoneySpent += (int)athlete.Price;
+                        finance.MoneyLeft -= (int)athlete.Price;
+                    } else
+                    {
+                        finance.NumberOfPurchases--;
+                        finance.MoneySpent -= (int)existingAthlete.Price;
+                        finance.MoneyLeft += (int)existingAthlete.Price;
+                    }
+                }
+            }
+
             existingAthlete.Name = athlete.Name;
             existingAthlete.Gender = athlete.Gender;
             existingAthlete.Price = athlete.Price;
