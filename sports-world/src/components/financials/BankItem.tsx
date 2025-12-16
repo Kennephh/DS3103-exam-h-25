@@ -3,31 +3,32 @@ import { useFinanceContext } from "../../contexts/FinanceContext";
 import Button from "../Button";
 
 const BankItem = () => {
-    const { financials, requestLoan } = useFinanceContext();
+    const {requestLoan } = useFinanceContext();
     const [loanAmount, setLoanAmount] = useState("");
+    const [error, setError] = useState(false);
+    const [invalidAmount, setInvalidAmount] = useState(false);
     const MAX_LOAN_AMOUNT = 99999999;
 
     const handleBorrow = () => {
         const amount = Number(loanAmount);
         
         if (isNaN(amount) || amount <= 0) {
-            alert("Please enter a valid loan amount");
+            setInvalidAmount(true)
+            setError(false) // Enusure that only one error appears
+            setTimeout(() => setInvalidAmount(false), 3000); // Reset error after 3 seconds
             return;
         }
 
-        // Legger til en låne grense da amount kan bli for stort og js 
         if (amount > MAX_LOAN_AMOUNT) {
-        alert(`Maximum loan amount is ${MAX_LOAN_AMOUNT}`);
-        return;
-    } 
+            setError(true);
+            setInvalidAmount(false)
+            setTimeout(() => setError(false), 3000);
+            return;
+        } 
 
         requestLoan(amount);
         setLoanAmount("");
     };
-
-    if (!financials) {
-        return <div>Loading financial data...</div>;
-    }
 
     return (
         <article className="
@@ -43,21 +44,29 @@ const BankItem = () => {
                 <h3 className="text-lg font-semibold mb-2">SportBank</h3>      
             </div>
             
-            <div className="m-2 flex justify-end gap-2">
+            <div className="m-2 flex flex-col justify-end gap-2 relative">
+                {invalidAmount && (
+                    <span className="absolute -top-5 left-0 text-red-500 text-sm">
+                        Please enter a valid number
+                    </span>
+                )}
+                {error && (
+                    <span className="absolute -top-5 left-0 text-red-500 text-sm">
+                        The amount is too high
+                    </span>
+                )}
                 <input 
                     type="number"
                     value={loanAmount}
                     onChange={(e) => setLoanAmount(e.target.value)}
                     placeholder="Enter loan amount..." 
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
+                    className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 ${error || invalidAmount ? 'border-red-500' : ''}`}
                     min="0"
-                    max={MAX_LOAN_AMOUNT}
                 />
                 <Button variant="primary" onClick={handleBorrow}>Borrow</Button>
-            
             </div>
         </article>
     );
-};
+};;
 
 export default BankItem;
