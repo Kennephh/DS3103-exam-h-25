@@ -17,7 +17,7 @@ const useVenuesActions = () => {
     };
 
 
-    const addVenue = async (newVenue: IVenue, image: File): Promise<IVenueResponse> => {
+    const addVenue = async (newVenue: IVenue, image: File | null): Promise<IVenueResponse> => {
         setStatus({
             message: "",
             type: "",
@@ -57,7 +57,7 @@ const useVenuesActions = () => {
         return result;
     };
 
-    const editVenue = async (venueToUpdate: IVenue, image: File): Promise<IVenueResponse> => {
+    const editVenue = async (venueToUpdate: IVenue, image: File | null): Promise<IVenueResponse> => {
         setStatus({
             isSubmitting: true,
             message: "",

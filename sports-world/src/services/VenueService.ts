@@ -101,10 +101,10 @@ const deleteVenue = async (id: number): Promise<IVenueResponse> => {
     }
 }
 
-const uploadImage = async (img: File): Promise<string | null> => {
+const uploadImage = async (image: File): Promise<IVenueResponse> => {
     try {
         const formData = new FormData();
-        formData.append("img", img);
+        formData.append("img", image);
         const response = await axios.post(API_PATHS.IMAGES, formData, {
             headers: {
                 "Content-Type": "multipart/form-data"
