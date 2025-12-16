@@ -14,7 +14,7 @@ const RegisterVenuePage = () => {
     const {addVenue, editVenue, getVenueById, status} = useVenueContext();
 
     const [name, setName] = useState<string>("");
-    const [capacity, setCapacity] = useState<number>(0);
+    const [capacity, setCapacity] = useState<number>();
     const [existingImage, setExistingImage] = useState<string>("");
     const [image, setImage] = useState<File | null>(null);
 
@@ -92,12 +92,6 @@ const RegisterVenuePage = () => {
 
                     <label>
                         Image:
-                        {id && existingImage && (
-                            <div>
-                                <p>Current image: </p>
-                                <img src={`${API_PATHS.IMAGES}/${existingImage}`} alt={name} />
-                            </div>
-                        )}
                         <input type="file"
                         onChange={handleImageUpload} 
                         className="border p-2 w-full" />
