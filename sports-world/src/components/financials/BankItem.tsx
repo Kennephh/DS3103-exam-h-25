@@ -11,20 +11,20 @@ const BankItem = () => {
 
     const handleBorrow = () => {
         const amount = Number(loanAmount);
-        
+
         if (isNaN(amount) || amount <= 0) {
-            setInvalidAmount(true)
-            setError(false) // Enusure that only one error appears
-            setTimeout(() => setInvalidAmount(false), 3000); // Reset error after 3 seconds
+            setInvalidAmount(true);
+            setError(false);
+            setTimeout(() => setInvalidAmount(false), 3000);
             return;
         }
 
         if (amount > MAX_LOAN_AMOUNT) {
             setError(true);
-            setInvalidAmount(false)
+            setInvalidAmount(false);
             setTimeout(() => setError(false), 3000);
             return;
-        } 
+        }
 
         requestLoan(amount);
         setLoanAmount("");
@@ -41,10 +41,10 @@ const BankItem = () => {
             transition-all
         ">
             <div className="px-2 flex flex-col">
-                <h3 className="text-lg font-semibold mb-2">SportBank</h3>      
+                <h3 className="text-lg font-semibold mb-2">SportBank</h3>
             </div>
-            
-            <div className="m-2 flex flex-col justify-end gap-2 relative">
+
+            <div className="m-2 flex flex-row justify-end gap-2 relative">
                 {invalidAmount && (
                     <span className="absolute -top-5 left-0 text-red-500 text-sm">
                         Please enter a valid number
@@ -55,11 +55,11 @@ const BankItem = () => {
                         The amount is too high
                     </span>
                 )}
-                <input 
+                <input
                     type="number"
                     value={loanAmount}
                     onChange={(e) => setLoanAmount(e.target.value)}
-                    placeholder="Enter loan amount..." 
+                    placeholder="Enter loan amount..."
                     className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 ${error || invalidAmount ? 'border-red-500' : ''}`}
                     min="0"
                 />
