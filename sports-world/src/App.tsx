@@ -8,13 +8,11 @@ import VenuePage from './pages/VenuePage'
 import RegisterVenuePage from './pages/RegisterVenuePage'
 import FinancePage from './pages/FinancePage'
 import { AthleteProvider } from './contexts/AthleteContext'
-import { VenueProvider } from './contexts/VenueContext'
 
 function App() {
 
   return (
     <AthleteProvider>
-      <VenueProvider>
         <Routes>
           <Route path="/" element={<AppLayout />}>
             <Route index element={<HomePage />} />
@@ -31,7 +29,6 @@ function App() {
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
-      </VenueProvider>
     </AthleteProvider>
   );
 }
