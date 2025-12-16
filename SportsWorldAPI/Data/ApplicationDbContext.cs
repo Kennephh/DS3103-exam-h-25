@@ -40,7 +40,7 @@ namespace SportsWorldAPI.Data
                     Gender = "Male",
                     Price = 50000000,
                     Image = "/images/ConorMcGregor.jpeg",
-                    PurchaseStatus = true
+                    PurchaseStatus = false
                 },
                 new Athlete
                 {
@@ -58,7 +58,7 @@ namespace SportsWorldAPI.Data
                     Gender = "Male",
                     Price = 15000000,
                     Image = "/images/DonaldCerrone.jpg",
-                    PurchaseStatus = true
+                    PurchaseStatus = false
                 },
                 new Athlete
                 {
@@ -67,7 +67,7 @@ namespace SportsWorldAPI.Data
                     Gender = "Male",
                     Price = 22000000,
                     Image = "/images/gsp.jpg",
-                    PurchaseStatus = true
+                    PurchaseStatus = false
                 },
                 new Athlete
                 {
@@ -76,7 +76,7 @@ namespace SportsWorldAPI.Data
                     Gender = "Male",
                     Price = 19000000,
                     Image = "/images/JoseAldo.jpg",
-                    PurchaseStatus = true
+                    PurchaseStatus = false
                 },
                 new Athlete
                 {
@@ -103,7 +103,7 @@ namespace SportsWorldAPI.Data
                     Gender = "Female",
                     Price = 29000000,
                     Image = "/images/RondaRousey.jpeg",
-                    PurchaseStatus = true
+                    PurchaseStatus = false
                 },
                 new Athlete
                 {
@@ -121,7 +121,7 @@ namespace SportsWorldAPI.Data
                     Gender = "Female",
                     Price = 21000000,
                     Image = "/images/MackenzieDern.png",
-                    PurchaseStatus = true
+                    PurchaseStatus = false
                 }
             );
 
