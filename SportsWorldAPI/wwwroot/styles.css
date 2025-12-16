@@ -1,7 +1,6 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: rgb(225,225,225);
-    color: #333;
     margin: 0;
     padding: 20px;
 }
@@ -17,7 +16,7 @@ header {
 }
 
 .logo {
-    width: 60px;
+    width: 40px;
     height: auto;
     object-fit: contain;
 }

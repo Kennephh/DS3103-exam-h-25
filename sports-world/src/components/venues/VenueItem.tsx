@@ -1,20 +1,32 @@
 import {type IVenue } from "../../interfaces/IVenue";
 import { API_BASE_URL } from "../../config";
+import Button from "../Button";
+import { useNavigate } from "react-router-dom";
 
 export interface IVenueItemProps{
-    venue: IVenue
+    venue: IVenue,
+    onDelete?: (id:number) => void
+    onEdit?: (id: number) => void
 }
 
-const VenueItem = ({venue}: IVenueItemProps) => {
-    const btnClasses = `
-        bg-sky-600
-        text-white
-        px-3
-        py-1
-        rounded
-        hover:bg-sky-700
-        hover:cursor-pointer
-    `;
+const VenueItem = ({venue, onDelete, onEdit}: IVenueItemProps) => {
+    const navigate = useNavigate();
+
+    const handleDelete = () => {
+        if (onDelete && venue.id !== undefined) {
+            onDelete(venue.id);
+        } else {
+            console.warn("Cannot delete venue without a valid ID.");
+        }
+    };
+
+    const handleEdit = () => {
+        if (onEdit && venue.id !== undefined) {
+            navigate(`/edit-venue/${venue.id}`);
+        } else {
+            console.warn("Cannot edit venue without a valid ID.");
+        }
+    };
 
     return(
         <article className="
@@ -24,7 +36,6 @@ const VenueItem = ({venue}: IVenueItemProps) => {
             bg-white
             rounded
             shadow-xl
-            hover:cursor-pointer
             hover:scale-102
             transition-all
         ">
@@ -38,8 +49,16 @@ const VenueItem = ({venue}: IVenueItemProps) => {
                 Capacity: {venue.capacity}
             </p>
             <div className="m-2 flex justify-end gap-2">
-                <button className={btnClasses}>Edit</button>
-                <button className={btnClasses}>Delete</button>
+                {onDelete &&(
+                <Button variant="danger" onClick={handleDelete}>
+                    Delete
+                </Button>
+                )}
+                {onEdit &&(
+                    <Button variant="primary" onClick={handleEdit}>
+                        Edit
+                    </Button>
+                )}
             </div>
         </article>
     );

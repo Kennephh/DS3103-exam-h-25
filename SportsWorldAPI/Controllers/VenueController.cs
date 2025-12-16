@@ -116,7 +116,7 @@ public class VenueController (ApplicationDbContext _appDbContext) : ControllerBa
             existingVenue.Image = updatedVenue.Image;
 
             await _appDbContext.SaveChangesAsync();
-            return NoContent();
+            return Ok(existingVenue);
         }
         catch (Exception e)
         {
