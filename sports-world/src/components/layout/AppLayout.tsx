@@ -19,7 +19,7 @@ const AppLayout = () => {
               </div>
           </nav>
 
-        <main className="grow overflow-y-auto">
+        <main className="grow overflow-y-scroll">
           <Outlet />
         </main>
 
