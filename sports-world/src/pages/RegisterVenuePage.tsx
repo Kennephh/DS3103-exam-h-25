@@ -92,12 +92,6 @@ const RegisterVenuePage = () => {
 
                     <label>
                         Image:
-                        {id && existingImage && (
-                            <div>
-                                <p>Current image: </p>
-                                <img src={`${API_PATHS.IMAGES}/${existingImage}`} alt={name} />
-                            </div>
-                        )}
                         <input type="file"
                         onChange={handleImageUpload} 
                         className="border p-2 w-full" />
