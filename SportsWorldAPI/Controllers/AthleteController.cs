@@ -117,9 +117,7 @@ public class AthletesController(ApplicationDbContext context) : ControllerBase
                         finance.MoneyLeft -= (int)athlete.Price;
                     } else
                     {
-                        finance.NumberOfPurchases--;
-                        finance.MoneySpent -= (int)existingAthlete.Price;
-                        finance.MoneyLeft += (int)existingAthlete.Price;
+                        finance.NumberOfPurchases--; //asda
                     }
                 }
             }
