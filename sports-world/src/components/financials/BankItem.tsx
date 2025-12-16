@@ -46,12 +46,12 @@ const BankItem = () => {
 
             <div className="m-2 flex flex-row justify-end gap-2 relative">
                 {invalidAmount && (
-                    <span className="absolute -top-5 left-0 text-red-500 text-sm">
+                    <span className="absolute -top-5 left-0 text-red-700 text-sm">
                         Please enter a valid number
                     </span>
                 )}
                 {error && (
-                    <span className="absolute -top-5 left-0 text-red-500 text-sm">
+                    <span className="absolute -top-5 left-0 text-red-700 text-sm">
                         The amount is too high
                     </span>
                 )}

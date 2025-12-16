@@ -19,10 +19,10 @@ const Button = ({ children, variant = "primary", className, ...props }: ButtonPr
     `;
 
     const variants = {
-        primary: "bg-sky-600 hover:bg-sky-700",
+        primary: "bg-sky-700 hover:bg-sky-800",
         secondary: "bg-gray-500 hover:bg-gray-600",
-        danger: "bg-red-600 hover:bg-red-700",
-        success: "bg-green-600 hover:bg-green-700"
+        danger: "bg-red-700 hover:bg-red-800",
+        success: "bg-green-800 hover:bg-green-900"
     };
 
     return (

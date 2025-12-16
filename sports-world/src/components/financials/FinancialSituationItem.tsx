@@ -23,7 +23,7 @@ const FinancialSituationItem = () => {
         ">
             <div className="px-2 flex flex-col">
                 <h3 className="text-lg font-semibold mb-2">Financial overview</h3>
-                <p className={isNegative ? 'text-red-600 font-semibold mb-2' : ''}>
+                <p className={isNegative ? 'text-red-700 font-semibold mb-2' : ''}>
                     Balance: {financials.moneyLeft}
                 </p>
                 <p>Expenditure: {financials.moneySpent}</p>
