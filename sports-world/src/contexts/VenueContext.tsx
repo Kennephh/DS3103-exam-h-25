@@ -39,6 +39,14 @@ export const VenueProvider = ({ children }: { children: ReactNode }) => {
         fetchVenues();
     }, []);
 
+    const resetStatus = () => {
+        setStatus({
+            isSubmitting: false,
+            message: "",
+            type: ""
+        });
+    };
+
     const fetchVenues = async () => {
         setIsLoading(true);
         const result = await VenueService.getAllVenues();
@@ -94,6 +102,7 @@ export const VenueProvider = ({ children }: { children: ReactNode }) => {
                 type: "Success"
             });
             setVenues([... venues, result.data as IVenue]);
+            setTimeout(resetStatus, 3000);
         } else{
             setStatus({
                 isSubmitting: false,
@@ -134,6 +143,7 @@ export const VenueProvider = ({ children }: { children: ReactNode }) => {
                 type: "Success"
             });
             setVenues(venues.map(venue => venue.id === venueToUpdate.id ? (result.data as IVenue) : venue));
+            setTimeout(resetStatus, 3000);
         } else{
             setStatus({
                 isSubmitting: false,
@@ -158,6 +168,7 @@ export const VenueProvider = ({ children }: { children: ReactNode }) => {
                 message: "Venue deleted.",
                 type: "Success"
             });
+            setTimeout(resetStatus, 3000);
         } else{
             setStatus({
                 isSubmitting: false,

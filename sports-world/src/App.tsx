@@ -27,6 +27,7 @@ function App() {
 
               <Route path="venues" element={<VenuePage />} />
               <Route path="register-venue" element={<RegisterVenuePage />} />
+              <Route path="edit-venue/:id" element={<RegisterVenuePage />} />
 
               
               <Route path='finance' element={<FinancePage/>} />

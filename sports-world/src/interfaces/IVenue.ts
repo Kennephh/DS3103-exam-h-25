@@ -1,6 +1,6 @@
 export interface IVenue {
     id?: number,
-    name: string,
+    name?: string,
     capacity: number,
-    image: string
+    image?: string
 }
