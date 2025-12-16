@@ -187,5 +187,10 @@ export const VenueProvider = ({ children }: { children: ReactNode }) => {
             {children}
         </VenueContext.Provider>
     );
+};
 
-}
+export const useVenueContext = () => {
+    const context = useContext(VenueContext);
+    if(!context) throw new Error ("useVenueContext must be used within a VenueProvider");
+    return context;
+};

@@ -8,27 +8,30 @@ import VenuePage from './pages/VenuePage'
 import RegisterVenuePage from './pages/RegisterVenuePage'
 import FinancePage from './pages/FinancePage'
 import { AthleteProvider } from './contexts/AthleteContext'
+import { VenueProvider } from './contexts/VenueContext'
 
 function App() {
 
   return (
     <AthleteProvider>
-      <Routes>
-        <Route path="/" element={<AppLayout />}>
-          <Route index element={<HomePage />} />
+      <VenueProvider>
+        <Routes>
+          <Route path="/" element={<AppLayout />}>
+            <Route index element={<HomePage />} />
 
-          <Route path="athletes" element={<AdministerAthletesPage />} />
-          <Route path="register-athlete" element={<RegisterAthletePage />} />
-          <Route path="edit-athlete/:id" element={<RegisterAthletePage />} />
+            <Route path="athletes" element={<AdministerAthletesPage />} />
+            <Route path="register-athlete" element={<RegisterAthletePage />} />
+            <Route path="edit-athlete/:id" element={<RegisterAthletePage />} />
 
-          <Route path="venues" element={<VenuePage />} />
-          <Route path="register-venue" element={<RegisterVenuePage />} />
+            <Route path="venues" element={<VenuePage />} />
+            <Route path="register-venue" element={<RegisterVenuePage />} />
 
-          <Route path='finance' element={<FinancePage/>} />
+            <Route path='finance' element={<FinancePage/>} />
 
-          <Route path="*" element={<NotFoundPage />} />
-        </Route>
-      </Routes>
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
+        </Routes>
+      </VenueProvider>
     </AthleteProvider>
   );
 }

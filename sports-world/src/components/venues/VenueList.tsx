@@ -1,10 +1,11 @@
 import VenueItem from "./VenueItem";
 import useVenues from "../../hooks/useVenues";
 import SearchBar from "../SearchBar";
+import { useVenueContext } from "../../contexts/VenueContext";
 
 const VenueList = () => {
 
-    const {venues, isLoading, errorMessage, userSearch, setUserSearch} = useVenues();
+    const {venues, isLoading, errorMessage, userSearch, setUserSearch} = useVenueContext();
 
     const getVenueJSX = () => {
         const venueJSX = venues.map( (venue) => {
