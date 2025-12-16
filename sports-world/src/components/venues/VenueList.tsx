@@ -1,10 +1,9 @@
 import VenueItem from "./VenueItem";
-import SearchVenue from "../SearchBar";
 import { useVenueContext } from "../../contexts/VenueContext";
 
 const VenueList = () => {
 
-    const {venues, isLoading, errorMessage, userSearch, setUserSearch, deleteVenue, status} = useVenueContext();
+    const {venues, isLoading, errorMessage, userSearch, deleteVenue, status} = useVenueContext();
 
     const handleDelete = async (id: number) => {
         const confirmDelete = window.confirm("Are you sure you want to delete this venue?");
