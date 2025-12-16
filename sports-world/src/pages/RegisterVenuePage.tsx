@@ -14,7 +14,7 @@ const RegisterVenuePage = () => {
     const {addVenue, editVenue, getVenueById, status} = useVenueContext();
 
     const [name, setName] = useState<string>("");
-    const [capacity, setCapacity] = useState<number>(0);
+    const [capacity, setCapacity] = useState<number>();
     const [existingImage, setExistingImage] = useState<string>("");
     const [image, setImage] = useState<File | null>(null);
 
