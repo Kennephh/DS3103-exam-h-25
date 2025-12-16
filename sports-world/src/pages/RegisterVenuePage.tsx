@@ -14,7 +14,7 @@ const RegisterVenuePage = () => {
     const {addVenue, editVenue, getVenueById, status} = useVenueContext();
 
     const [name, setName] = useState<string>("");
-    const [capacity, setCapacity] = useState<number>(0);
+    const [capacity, setCapacity] = useState<number | string>("");
     const [existingImage, setExistingImage] = useState<string>("");
     const [image, setImage] = useState<File | null>(null);
 
@@ -30,7 +30,7 @@ const RegisterVenuePage = () => {
 
                     const venue = result.data as IVenue;
                     setName(venue.name ?? "")
-                    setCapacity(venue.capacity)
+                    setCapacity(venue.capacity ?? "")
                     setExistingImage(venue.image ?? "");
                 } else{
                     alert("Error finding venue to edit.")
@@ -83,11 +83,21 @@ const RegisterVenuePage = () => {
                         <input type="text" value={name} onChange={(e) => setName(e.target.value)
                         } className="border p-2 w-full" />
                     </label>
-
+                        
+                        {/* 
+                            Fikk hjelp av Gemini til å skrive denne koden.
+                            Som gjør at det ikke skal være mulig å skrive inn -
+                            bokstaver i Capacity-søkefeltet
+                         */}
                     <label>
                         Capacity:
-                        <input type="number" value={capacity} onChange={(e) => setCapacity(Number(e.target.value))
-                        } className="border p-2 w-full" />
+                        <input type="text" inputMode="numeric" pattern="[0-9]" value={capacity} onChange={(e) => {
+                            const value = e.target.value
+                            if(value === "" || /^\d+$/.test(value)) {
+                                setCapacity(value)
+                            }
+                        }}
+                           className="border p-2 w-full" />
                     </label>
 
                     <label>
