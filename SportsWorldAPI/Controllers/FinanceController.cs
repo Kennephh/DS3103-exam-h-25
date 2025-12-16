@@ -23,26 +23,6 @@ public class FinanceController(ApplicationDbContext _applicationDbContext) : Con
         }
     }
 
-    [HttpPost]
-    public async Task<ActionResult<Finance>> PostFinance([FromBody] Finance newFinance)
-    {
-        try
-        {
-            var finances = await _applicationDbContext.Finances.FirstOrDefaultAsync();
-            if (finances == null) return NotFound("Finances not found");
-
-            finances.MoneyLeft = newFinance.MoneyLeft;
-            finances.MoneySpent = newFinance.MoneySpent;
-            finances.NumberOfPurchases = newFinance.NumberOfPurchases;
-
-            await _applicationDbContext.SaveChangesAsync();
-            return Ok(finances);
-        }
-        catch
-        {
-            return StatusCode(500, "Server side error when posting finance");
-        }
-    }
 
     [HttpPut]
     public async Task<ActionResult<Finance>> UpdateFinance([FromBody] Finance updatedFinance)

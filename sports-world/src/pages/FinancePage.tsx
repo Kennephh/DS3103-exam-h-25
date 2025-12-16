@@ -5,7 +5,7 @@ import { useFinanceContext } from "../contexts/FinanceContext";
 import { useAthleteContext } from "../contexts/AthleteContext";
 
 const FinancePageContent = () => {
-    const {updateFinance } = useFinanceContext();
+    const {fetchFinancials } = useFinanceContext();
     const { athletes, getAthletes, editAthlete } = useAthleteContext();
 
     const handlePurchase = async (id: number) => {
@@ -17,12 +17,9 @@ const FinancePageContent = () => {
             }
 
             const updatedAthlete = { ...athleteToUpdate, purchaseStatus: true };
-
             await editAthlete(updatedAthlete);
+            fetchFinancials();
 
-            if (athleteToUpdate.price) {
-                await updateFinance(athleteToUpdate.price);
-            }
         } catch (error) {
             alert("Error updating athlete purchase status");
         }
@@ -30,7 +27,7 @@ const FinancePageContent = () => {
 
     useEffect(() => {
         getAthletes();
-    }, [getAthletes]);
+    }, []);
 
     const notPurchasedAthletes = athletes.filter(athlete => athlete.purchaseStatus == false);
 

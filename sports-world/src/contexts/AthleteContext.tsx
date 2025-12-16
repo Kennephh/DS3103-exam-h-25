@@ -35,7 +35,7 @@ export const AthleteProvider = ({ children }: {children: ReactNode}) => {
         setError(null);
     }
 
-    const getAthletes = useCallback(async(searchQuery: string = "") => {
+    const getAthletes = useCallback(async(searchQuery: string = "") => { // Added usecallback so it would not loop infinite (used)
         startRequest();
         let data;
 

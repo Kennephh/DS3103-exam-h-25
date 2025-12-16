@@ -15,19 +15,10 @@ const getFinance = async () : Promise<IFinance | undefined> => {
     }
 }
 
-const postFinance = async (newFinance : IFinance) : Promise <IFinance | undefined> => {
-    try{
-        const response = await axios.post<IFinance>(endpoint, newFinance);
-        return response.data
-    } catch (error) {
-        console.error("Error posting finances", error);
-        return undefined
-    }
-}
 
-const putFinance = async (newFinance : IFinance) : Promise<IFinance | undefined> => {
+const putFinance = async (updateFinance : IFinance) : Promise<IFinance | undefined> => {
     try{
-        const response = await axios.put(endpoint, newFinance);
+        const response = await axios.put(endpoint, updateFinance);
         return response.data
         }
      catch (error) {
@@ -36,4 +27,4 @@ const putFinance = async (newFinance : IFinance) : Promise<IFinance | undefined>
     }
 }
 
-export {getFinance, postFinance, putFinance}
+export {getFinance, putFinance}

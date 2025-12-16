@@ -1,8 +1,7 @@
 import { createContext, useState, useEffect, useContext, type ReactNode } from "react";
 import type { IFinance } from "../interfaces/IFinance";
 import type { IFinanceContext } from "../interfaces/IFinanceContext";
-import { getFinance, postFinance, putFinance } from "../services/financeService";
-import { useAthleteContext } from "../contexts/AthleteContext";
+import { getFinance, putFinance } from "../services/financeService";
 
 const FinanceContext = createContext<IFinanceContext | null>(null);
 
@@ -16,7 +15,6 @@ export const useFinanceContext = () => {
 
 export const FinanceProvider = ({ children }: { children: ReactNode }) => {
     const [financials, setFinancials] = useState<IFinance | null>(null);
-     const {athletes} = useAthleteContext();
 
     const fetchFinancials = async () => {
         try {
@@ -38,48 +36,23 @@ export const FinanceProvider = ({ children }: { children: ReactNode }) => {
         };
 
         try {
-            const updated = await postFinance(newFinanceObject);
+            const updated = await putFinance(newFinanceObject);
             if (updated) setFinancials(updated);
         } catch (error) {
             console.error("Failed to requestLoan:", error);
         }
     };
 
-    const updateFinance = async (amount: number) => {
-        const purchasedAthletes = athletes.filter(athlete => athlete.purchaseStatus === true).length;
-
-        console.log('Total athletes:', athletes.length);
-        console.log('Purchased athletes:', purchasedAthletes);
-        console.log('Current financials.numberOfPurchases:', financials?.numberOfPurchases);
-
-        if (!financials) return;
-
-        const updatedFinanceObject: IFinance = {
-            ...financials,
-            moneyLeft: financials.moneyLeft - amount,
-            numberOfPurchases: purchasedAthletes,
-            moneySpent: financials.moneySpent + amount,
-        };
-
-        try {
-            const updated = await putFinance(updatedFinanceObject);
-            if (updated) setFinancials(updated);
-        } catch (error) {
-            console.error("Failed to updateFinance", error);
-        }
-    };
-
     useEffect(() => {
         fetchFinancials();
-        athletes;
     }, []);
+
 
     return (
         <FinanceContext.Provider value={{
             financials,
             fetchFinancials,
-            requestLoan,
-            updateFinance,
+            requestLoan
         }}>
             {children}
         </FinanceContext.Provider>
