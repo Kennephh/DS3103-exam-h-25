@@ -5,14 +5,21 @@ import Button from "../Button";
 const BankItem = () => {
     const { financials, requestLoan } = useFinanceContext();
     const [loanAmount, setLoanAmount] = useState("");
+    const MAX_LOAN_AMOUNT = 99999999;
 
     const handleBorrow = () => {
-        const amount = parseInt(loanAmount);
+        const amount = Number(loanAmount);
         
         if (isNaN(amount) || amount <= 0) {
             alert("Please enter a valid loan amount");
             return;
         }
+
+        // Legger til en låne grense da amount kan bli for stort og js 
+        if (amount > MAX_LOAN_AMOUNT) {
+        alert(`Maximum loan amount is ${MAX_LOAN_AMOUNT}`);
+        return;
+    } 
 
         requestLoan(amount);
         setLoanAmount("");
@@ -44,6 +51,7 @@ const BankItem = () => {
                     placeholder="Enter loan amount..." 
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
                     min="0"
+                    max={MAX_LOAN_AMOUNT}
                 />
                 <Button variant="primary" onClick={handleBorrow}>Borrow</Button>
             
