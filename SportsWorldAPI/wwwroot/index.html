@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SportsWorldAPI</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="images/logo.png" />
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <img src="images/logo.png" alt="SportsWorld Logo" class="logo"/>
+            <h1>SportsWorld API</h1>
+        </div>
+    </header>
+
+    <main class="grid-container">
+
+        <!-- Athletes section -->
+        <section class="section">
+
+            <h2>Athletes</h2>
+
+            <table>
+                <tr>
+                    <th>Method</th>
+                    <th>Endpoint</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><span class="badge">GET</span></td>
+                    <td>/api/athletes</td>
+                    <td>Henter alle utøvere.</td>
+                </tr>
+                <tr>
+                    <td><span class="badge">GET</span></td>
+                    <td>/api/athletes/{id}</td>
+                    <td>Henter en utøver basert på ID.</td>
+                </tr>
+                <tr>
+                    <td><span class="badge">GET</span></td>
+                    <td>/api/athletes/search?name={name}</td>
+                    <td>Søker etter utøvere basert på navn.</td>
+                </tr>
+                <tr>
+                    <td><span class="badge">POST</span></td>
+                    <td>/api/athletes</td>
+                    <td>Oppretter en ny utøver.</td>
+                </tr>
+                <tr>
+                    <td><span class="badge">PUT</span></td>
+                    <td>/api/athletes/{id}</td>
+                    <td>Oppdaterer en eksisterende utøver.</td>
+                </tr>
+                <tr>
+                    <td><span class="badge">DELETE</span></td>
+                    <td>/api/athletes/{id}</td>
+                    <td>Sletter en utøver.</td>
+                </tr>
+            </table>
+
+        </section>
+
+        <!-- Venues section -->
+        <section class="section">
+
+            <h2>Venues</h2>
+
+            <table>
+                <tr>
+                    <th>Method</th>
+                    <th>Endpoint</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><span class="badge">GET</span></td>
+                    <td>/api/venue</td>
+                    <td>Henter alle venues.</td>
+                </tr>
+                <tr>
+                    <td><span class="badge">GET</span></td>
+                    <td>/api/venue/{id}</td>
+                    <td>Henter venue basert på ID.</td>
+                </tr>
+                <tr>
+                    <td><span class="badge">GET</span></td>
+                    <td>/api/venue/ByName/{name}</td>
+                    <td>Søker etter venue basert på navn.</td>
+                </tr>
+                <tr>
+                    <td><span class="badge">POST</span></td>
+                    <td>/api/venue</td>
+                    <td>Oppretter en venue.</td>
+                </tr>
+                <tr>
+                    <td><span class="badge">PUT</span></td>
+                    <td>/api/venue/{id}</td>
+                    <td>Oppdaterer en venue.</td>
+                </tr>
+                <tr>
+                    <td><span class="badge">DELETE</span></td>
+                    <td>/api/venue/{id}</td>
+                    <td>Sletter en venue.</td>
+                </tr>
+            </table>
+
+        </section>
+
+        <!-- Finance section -->
+        <section class="section">
+
+            <h2>Finance</h2>
+
+            <table>
+                <tr>
+                    <th>Method</th>
+                    <th>Endpoint</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><span class="badge">GET</span></td>
+                    <td>/api/finance</td>
+                    <td>Henter nåværende finance status.</td>
+                </tr>
+                <tr>
+                    <td><span class="badge">PUT</span></td>
+                    <td>/api/finance</td>
+                    <td>Oppdaterer finansene.</td>
+                </tr>
+            </table>
+
+        </section>
+
+        <!-- Images section -->
+        <section class="section">
+
+            <h2>Images</h2>
+
+            <table>
+                <tr>
+                    <th>Method</th>
+                    <th>Endpoint</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><span class="badge">POST</span></td>
+                    <td>/api/image</td>
+                    <td>Laster opp et bilde. Returnerer filstien.</td>
+                </tr>
+            </table>
+
+        </section>
+
+    </main>
+
+</body>
+</html>
