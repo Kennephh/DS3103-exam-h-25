@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getAthleteById, uploadImage } from "../services/athleteService";
 import { useAthleteContext } from "../contexts/AthleteContext";
-import { useFinanceContext } from "../contexts/FinanceContext";
-import { putFinance } from "../services/financeService";
+import Button from "../components/Button";
 
 const RegisterAthletePage = () => {
 
@@ -11,7 +10,6 @@ const RegisterAthletePage = () => {
     const navigate = useNavigate();
 
     const { addAthlete, editAthlete, isLoading} = useAthleteContext();
-    const { updateFinance } = useFinanceContext();
 
     const [athlete, setAthlete] = useState({
         name: "",
@@ -47,7 +45,6 @@ const RegisterAthletePage = () => {
 
     const handlePurchaseStatusChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setAthlete({ ...athlete, purchaseStatus: event.target.checked});
-        console.log(athlete.purchaseStatus, "handlePurchaseStatusChange")
     };
 
     const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -81,9 +78,7 @@ const RegisterAthletePage = () => {
             } else {
                 await addAthlete(athleteToSave);
             };
-            updateFinance: (amount: number) => Promise<void>;
-
-            navigate("/athletes");
+            navigate("/athletes", { state: { message: `${athleteToSave.name} saved!` } });
         } catch(error){
             alert("Feil ved lagring av atlet");
         }
@@ -123,10 +118,14 @@ const RegisterAthletePage = () => {
                     <input type="file" onChange={handleImageChange} className="border p-2 w-full" />
                 </label>
 
-                <button
-                    type={"submit"}
+                <Button
+                    type ="submit"
                     disabled={isLoading}
-                    className={`bg-sky-600 text-white p-2 rounded ${isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-sky-700'}`} >{isLoading ? "Saving..." : "Lagre"}</button>
+                    variant="primary"
+                    className="py-2 w-full"
+                >
+                    {isLoading ? "Saving..." : "Lagre"}
+                </Button>
             </form>
 
         </div>
