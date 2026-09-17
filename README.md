@@ -1,6 +1,7 @@
 # DS3103-Webutvikling
 
 **Medvirkende: Alexander, Michael, Kenneth**
+**Karakter: A**
 
 ## Teknologier/teknikker brukt:
 ### React + Typescript, C#/.NET, Tailwind CSS, SQLite, BrowserRouter
