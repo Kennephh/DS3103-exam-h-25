@@ -61,3 +61,19 @@ npm run dev
 ```
 
 <img width="590" height="378" alt="image" src="https://github.com/user-attachments/assets/598bed89-1af7-4e05-91f0-ed9e4914d4f3" />
+
+
+
+<img width="1920" height="1037" alt="image" src="https://github.com/user-attachments/assets/70c6db81-4e3e-4855-8e2d-94a723b31fb6" />
+
+<img width="1920" height="1036" alt="image" src="https://github.com/user-attachments/assets/1b8661a5-4dfa-4df1-85ad-d02141ac36e8" />
+
+<img width="1920" height="1036" alt="image" src="https://github.com/user-attachments/assets/48ffc671-00a8-4893-9e80-45f87c045349" />
+
+<img width="1920" height="1036" alt="image" src="https://github.com/user-attachments/assets/2ef5a808-a1d5-4820-8bac-1453c538fba6" />
+
+<img width="1920" height="1036" alt="image" src="https://github.com/user-attachments/assets/d26eee84-4047-4d34-a196-50a51f93449a" />
+
+<img width="1920" height="1036" alt="image" src="https://github.com/user-attachments/assets/1e47c852-5250-45a1-9937-017c97dcb032" />
+
+
