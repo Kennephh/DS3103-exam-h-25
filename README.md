@@ -5,7 +5,7 @@
 **Karakter: A**
 
 ## Teknologier/teknikker brukt:
-### React + Typescript, C#/.NET, Tailwind CSS, SQLite, BrowserRouter
+### React + Typescript, C#/.NET, Tailwind CSS, SQLite
 
 ---
 
